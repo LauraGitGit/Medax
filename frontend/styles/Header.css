@@ -1,0 +1,79 @@
+.app-header {
+  background: #fff1e4;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.logo-section {
+  justify-self: start;
+}
+
+.logo {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  display: block;
+  margin-left: 7rem;
+}
+
+.logo-text {
+  text-align: center;
+  margin-right: 7rem;
+}
+
+.logo-text h1 {
+  margin: 0;
+  font-size: 6rem;
+  font-weight: 700;
+  color: #de7b35;
+}
+
+.logo-text p {
+  margin: 0.25rem 0 0 0;
+  color: #de7b35;
+  font-size: 0.9rem;
+}
+
+.header-spacer {
+  width: 220px;
+  height: 1px;
+}
+
+.mobile-rectangle-logo {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin: 1.25rem 0;
+    height: 15vh;
+  }
+
+  /* On mobile we only want the rectangle banner image */
+  .logo-section {
+    display: none;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .header-spacer {
+    display: none;
+  }
+
+  .mobile-rectangle-logo {
+    display: block;
+    max-width: 300px;
+    max-height: 200px;
+  }
+}

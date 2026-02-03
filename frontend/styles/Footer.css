@@ -1,0 +1,35 @@
+.app-footer {
+  background: #edf6fb;
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+  border: 1px solid #d7e7f2;
+  box-shadow: 0 2px 10px rgba(23, 77, 112, 0.06);
+  margin: 2rem 0 0 0;
+}
+
+.footer-content {
+  display: flex;
+  gap: 0.7rem;
+  color: #4a4a4a;
+}
+
+.footer-content svg {
+  flex-shrink: 0;
+  color: #d6ad2f;
+}
+
+.footer-content p {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .app-footer {
+    padding: 1rem 1.2rem;
+  }
+
+  .footer-content p {
+    font-size: 0.6rem;
+  }
+}

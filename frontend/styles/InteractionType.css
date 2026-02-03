@@ -1,0 +1,99 @@
+.tabs-step-section {
+  background: #f8f8f8;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.tabs-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 1.5rem;
+  row-gap: 1rem;
+  width: 100%;
+  margin: 0.75rem 0 0 0;
+}
+
+.tab-button {
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem 0.6rem;
+  border: 2px solid #d7d7d7;
+  border-radius: 16px;
+  background: #f5f5f5;
+  color: #6e6e6e;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 160px;
+}
+
+.tab-button:hover {
+  border-color: #b9dfbe;
+  background: #eef9f0;
+}
+
+.tab-button.active {
+  background: linear-gradient(135deg, #87d58f 0%, #67be73 100%);
+  border-color: #67be73;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(103, 190, 115, 0.35);
+}
+
+.tab-button:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.tab-button span {
+  font-size: 0.82rem;
+}
+
+.tab-button svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .tabs-step-section {
+    text-align: center;
+  }
+
+  .tabs-step-title {
+    font-size: 1.65rem;
+  }
+
+  .tabs-container {
+    row-gap: 1rem;
+    margin: 0.75rem;
+  }
+
+  .tab-button {
+    font-size: 0.9rem;
+    min-width: 100px;
+    min-height: 75px;
+    max-height: 75px;
+    max-width: 100px;
+    padding: 0.8rem 0.6rem;
+    width: auto;
+  }
+
+  .tab-button span {
+    font-size: 0.7rem;
+  }
+
+  .tab-button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
