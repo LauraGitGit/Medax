@@ -1,110 +1,41 @@
-# Medication Interaction API
+# Medax — Don't guess, check.
 
-A REST API for managing medications and their interaction information (e.g. with food, alcohol, pregnancy, breastfeeding). Uses JWT for authentication.
+A full-stack medication interaction checker. Search any drug and instantly
+check interactions with other medications, alcohol, food, and pregnancy risks.
 
-> **PS:** This is a study based API that has a few manually added medication information. The plan was to use FASS API as a data source but unfortunately its too expensive(15000 SEK/year) to use FASS. I am thinking of an alternative currently.
+## What it does
 
----
+- Search medications using the OpenFDA API
+- Check drug interactions across 5 categories:
+  - Drug-Drug
+  - Drug-Alcohol
+  - Drug-Food
+  - Pregnancy & Breastfeeding
+  - General Warnings
+- JWT-protected REST API for managing medication data
+- React frontend with real-time search and interaction analysis
 
-## Prerequisites
+## Tech stack
 
-- **Node.js** (v18 or similar)
-- **MongoDB** running locally on `localhost:27017`
+**Frontend:** React, Vite, OpenFDA API
 
----
+**Backend:** Node.js, Express, MongoDB, JWT
 
-## How to run
+## Data source
 
-1. **Install dependencies**
+Drug interaction data is sourced from the
+[OpenFDA API](https://open.fda.gov/) — a free, public API
+maintained by the U.S. Food & Drug Administration.
 
-   ```bash
-   npm install
-   ```
+> **Note:** FASS (Swedish drug database) was the preferred data source
+> but requires a paid agreement (15,000 SEK/year). OpenFDA was chosen
+> as a free alternative with equivalent interaction data.
 
-2. **Start MongoDB** (if not already running)  
-   Make sure MongoDB is running on `mongodb://localhost:27017`.
+## Live demo
 
-3. **Start the API**
+[medax.github.io](https://lauragitgit.github.io/Medication-Interaction-API/)
 
-   ```bash
-   npm start
-   ```
+## Disclaimer
 
-   The server runs on **port 3001**. You should see: `Server is running on port 3001`, `Connected to database`.
-
-4. **Test the API**  
-   Use the `medication-api.http` file in this repo (e.g. in VS Code or cursor with the REST Client extension).
-
----
-
-## Base URL
-
-```
-http://localhost:3001
-```
-
----
-
-> **PS: Why auth?** This is one of the security threats I talked about in my video. Because my API
-> gives safety information, it’s important that the interaction rules cannot be changed by
-> unauthorized users. If someone changed them, the API could give unsafe advice
-
-## Authentication
-
-Most medication endpoints require a **JWT token**. Flow:
-
-1. **Register** → `POST /auth/register` (email + password)
-2. **Login** → `POST /auth/login` (email + password)  
-   Response includes a **token**.
-3. **Use the token** in requests that need auth:
-   ```http
-   Authorization: Bearer YOUR_TOKEN_HERE
-   ```
-
-> **Tokens expire after1 minutes** (This is just for testing purpose for now). After that, use "Token expired, please log in again" as a signal to call login again and get a new token.
-
----
-
-## Endpoints
-
-| Method | Path                       | Auth? | Description                           |
-| ------ | -------------------------- | ----- | ------------------------------------- |
-| POST   | `/auth/register`           | No    | Register a new user (email, password) |
-| POST   | `/auth/login`              | No    | Log in and get a JWT token            |
-| POST   | `/medication`              | Yes   | Create one medication                 |
-| POST   | `/medications`             | Yes   | Create up to 10 medications at once   |
-| GET    | `/medication/count`        | No    | Get total number of medications       |
-| GET    | `/medication/search/:name` | No    | Get one medication by name            |
-| DELETE | `/medication/:id`          | Yes   | Delete a medication by MongoDB `_id`  |
-
----
-
-> **PS: Why a limit?** To prevent abuse: allowing a very large list in one request could slow down or crash the API, so bulk create is capped at 10 medications per request.
-
-## Status codes
-
-- **200** – OK (e.g. login, search found, count)
-- **201** – Created (register, create medication(s))
-- **204** – No Content (successful delete)
-- **400** – Bad Request (missing/invalid input, invalid id)
-- **401** – Unauthorized (invalid/expired token, wrong login)
-- **404** – Not Found (medication not found)
-- **429** – Too Many Requests (e.g. more than 10 medications in one bulk create)
-- **500** – Server Error (unexpected error)
-
----
-
-## Project structure
-
-- **`app.js`** – Express app, routes, auth middleware
-- **`db.js`** – MongoDB connection and data functions
-- **`medication-api.http`** – Example HTTP requests you can run in an editor (e.g. REST Client in VS Code)
-
----
-
-## Database
-
-- **MongoDB** database name: `medication-interaction`
-- Collections: `medication`, `users`
-
-Ensure MongoDB is running locally before starting the API.
+This is a study project. Always consult your healthcare provider
+before making changes to your medication regimen.
