@@ -1,11 +1,12 @@
 import "../styles/SearchInput.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Info } from "lucide-react";
 import icons8Plus from "../images/icons8-plus.svg";
 import MedicationTag from "./MedicationTag";
 import { fetchMedicationSuggestions } from "../openFdaApi";
 
 export default function SearchInput({ addedMedications, setAddedMedications }) {
+  const searchSectionRef = useRef(null);
   const [searchMedication, setSearchMedication] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [isSelectionMode, setIsSelectionMode] = useState(false);
@@ -99,6 +100,19 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
     );
   }, [addedMedications]);
 
+  useEffect(() => {
+    function handlePointerDown(event) {
+      if (!searchSectionRef.current?.contains(event.target)) {
+        setSuggestions([]);
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, []);
+
   // Render suggestions
   function renderSuggestions() {
     if (suggestions.length === 0) return null;
@@ -140,7 +154,7 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
   }
 
   return (
-    <section className="step-section">
+    <section className="step-section" ref={searchSectionRef}>
       <span className="step-badge">Step 1</span>
       <h2 className="step-title">Search medication</h2>
       <div className="search-wrapper">
