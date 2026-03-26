@@ -32,7 +32,7 @@ async function fetchWithBackendFallback(primaryUrl, fallbackUrl) {
 export async function fetchMedicationSuggestions(searchMedication) {
   const medicationQuery = encodeURIComponent(searchMedication.trim());
   const proxyUrl = `${API_BASE_URL}/api/openfda/search?name=${medicationQuery}`;
-  const directUrl = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${medicationQuery}*&limit=8`;
+  const directUrl = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${medicationQuery}*&limit=10`;
   const data = await fetchWithBackendFallback(
     USE_BACKEND_PROXY ? proxyUrl : directUrl,
     directUrl,
