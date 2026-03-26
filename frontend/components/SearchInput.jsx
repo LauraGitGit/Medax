@@ -6,6 +6,11 @@ import MedicationTag from "./MedicationTag";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+const IS_LOCALHOST =
+  typeof window !== "undefined" &&
+  (window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1");
+const USE_BACKEND_PROXY = Boolean(import.meta.env.VITE_API_BASE_URL) || IS_LOCALHOST;
 
 export default function SearchInput({ addedMedications, setAddedMedications }) {
   const [searchMedication, setSearchMedication] = useState("");
@@ -21,8 +26,11 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
     async function fetchMedications() {
       try {
         const medicationQuery = encodeURIComponent(searchMedication.trim());
+        const url = USE_BACKEND_PROXY
+          ? `${API_BASE_URL}/api/openfda/search?name=${medicationQuery}`
+          : `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${medicationQuery}*&limit=8`;
         const response = await fetch(
-          `${API_BASE_URL}/api/openfda/search?name=${medicationQuery}`,
+          url,
         );
         const data = await response.json();
 

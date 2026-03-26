@@ -4,6 +4,12 @@ import { useState, useEffect } from "react";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+const IS_LOCALHOST =
+  typeof window !== "undefined" &&
+  (window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1");
+const USE_BACKEND_PROXY =
+  Boolean(import.meta.env.VITE_API_BASE_URL) || IS_LOCALHOST;
 
 export default function ReviewAnalysis({ addedMedications, interactionType }) {
   const [results, setResults] = useState([]);
@@ -88,9 +94,10 @@ export default function ReviewAnalysis({ addedMedications, interactionType }) {
       const allResults = await Promise.all(
         addedMedications.map(async (medication) => {
           const medicationQuery = encodeURIComponent(medication);
-          const response = await fetch(
-            `${API_BASE_URL}/api/openfda/label?name=${medicationQuery}`,
-          );
+          const url = USE_BACKEND_PROXY
+            ? `${API_BASE_URL}/api/openfda/label?name=${medicationQuery}`
+            : `https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22${medicationQuery}%22&limit=1`;
+          const response = await fetch(url);
           const data = await response.json();
           return data.results?.[0];
         }),
