@@ -4,12 +4,11 @@ import { Info } from "lucide-react";
 import icons8Plus from "../images/icons8-plus.svg";
 import MedicationTag from "./MedicationTag";
 
-export default function SearchInput({
-  addedMedications,
-  setAddedMedications,
-}) {
+export default function SearchInput({ addedMedications, setAddedMedications }) {
   const [searchMedication, setSearchMedication] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [isSelectionMode, setIsSelectionMode] = useState(false);
+  const [selectedMedications, setSelectedMedications] = useState([]);
 
   useEffect(() => {
     if (!searchMedication.trim()) {
@@ -62,6 +61,47 @@ export default function SearchInput({
     );
   }
 
+  // Edit list
+  function handleToggleSelectionMode() {
+    setIsSelectionMode((prevMode) => {
+      const nextMode = !prevMode;
+      if (!nextMode) {
+        setSelectedMedications([]);
+      }
+      return nextMode;
+    });
+  }
+
+  function handleSelectMedication(medication) {
+    setSelectedMedications((prevSelected) =>
+      prevSelected.includes(medication)
+        ? prevSelected.filter((med) => med !== medication)
+        : [...prevSelected, medication],
+    );
+  }
+
+  function handleSelectAll() {
+    const areAllSelected =
+      selectedMedications.length === addedMedications.length;
+    setSelectedMedications(areAllSelected ? [] : [...addedMedications]);
+  }
+
+  function handleDeleteSelected() {
+    if (selectedMedications.length === 0) return;
+
+    setAddedMedications((prevMedications) =>
+      prevMedications.filter((med) => !selectedMedications.includes(med)),
+    );
+    setSelectedMedications([]);
+    setIsSelectionMode(false);
+  }
+
+  useEffect(() => {
+    setSelectedMedications((prevSelected) =>
+      prevSelected.filter((med) => addedMedications.includes(med)),
+    );
+  }, [addedMedications]);
+
   // Render suggestions
   function renderSuggestions() {
     if (suggestions.length === 0) return null;
@@ -95,6 +135,9 @@ export default function SearchInput({
         key={medication}
         name={medication}
         onRemove={() => handleRemoveMedication(medication)}
+        isSelectionMode={isSelectionMode}
+        isSelected={selectedMedications.includes(medication)}
+        onSelectToggle={() => handleSelectMedication(medication)}
       />
     ));
   }
@@ -116,7 +159,44 @@ export default function SearchInput({
       </div>
 
       {addedMedications.length > 0 && (
-        <div className="added-medications">{renderAddedMedications()}</div>
+        <section
+          className="added-medications-panel"
+          aria-label="Added medications"
+        >
+          <div className="added-medications-toolbar">
+            <button
+              type="button"
+              className="selection-button"
+              onClick={handleToggleSelectionMode}
+            >
+              {isSelectionMode ? "Back" : "Edit list"}
+            </button>
+
+            {isSelectionMode && (
+              <div className="bulk-actions">
+                <button
+                  type="button"
+                  className="selection-button"
+                  onClick={handleSelectAll}
+                >
+                  {selectedMedications.length === addedMedications.length
+                    ? "Unselect all"
+                    : "Select all"}
+                </button>
+                <button
+                  type="button"
+                  className="delete-selected-button"
+                  onClick={handleDeleteSelected}
+                  disabled={selectedMedications.length === 0}
+                >
+                  Delete selected ({selectedMedications.length})
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className="added-medications">{renderAddedMedications()}</div>
+        </section>
       )}
 
       {addedMedications.length === 0 && (

@@ -117,6 +117,59 @@
   color: #2e7d32;
 }
 
+.added-medications-panel {
+  margin-top: 1rem;
+}
+
+.added-medications-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.bulk-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.selection-button,
+.delete-selected-button {
+  border: 1px solid #d0d0d0;
+  background: linear-gradient(135deg, #de7b35 0%, #b58a62 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.selection-button:hover {
+  border-color: #81c784;
+  color: white;
+  translate: scale(1.05);
+}
+
+.delete-selected-button {
+  border-color: #ef9a9a;
+  color: white;
+}
+
+.delete-selected-button:hover:not(:disabled) {
+  background: #ffebee;
+}
+
+.delete-selected-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
   .step-section {
     padding: 1rem;
@@ -161,5 +214,23 @@
     width: 16px;
     height: 16px;
     align-items: center;
+  }
+
+  .added-medications-toolbar {
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bulk-actions {
+    flex-wrap: nowrap;
+  }
+
+  .selection-button,
+  .delete-selected-button {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.6rem;
+    flex-shrink: 0;
   }
 }
