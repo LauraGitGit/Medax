@@ -1,15 +1,7 @@
 import "../styles/ReviewAnalysis.css";
 import { AlertTriangle, ShieldCheck, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
-
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
-const IS_LOCALHOST =
-  typeof window !== "undefined" &&
-  (window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1");
-const USE_BACKEND_PROXY =
-  Boolean(import.meta.env.VITE_API_BASE_URL) || IS_LOCALHOST;
+import { fetchMedicationLabel } from "../openFdaApi";
 
 export default function ReviewAnalysis({ addedMedications, interactionType }) {
   const [results, setResults] = useState([]);
@@ -93,13 +85,7 @@ export default function ReviewAnalysis({ addedMedications, interactionType }) {
     async function fetchInteractions() {
       const allResults = await Promise.all(
         addedMedications.map(async (medication) => {
-          const medicationQuery = encodeURIComponent(medication);
-          const url = USE_BACKEND_PROXY
-            ? `${API_BASE_URL}/api/openfda/label?name=${medicationQuery}`
-            : `https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22${medicationQuery}%22&limit=1`;
-          const response = await fetch(url);
-          const data = await response.json();
-          return data.results?.[0];
+          return fetchMedicationLabel(medication);
         }),
       );
       setResults(allResults.filter(Boolean));

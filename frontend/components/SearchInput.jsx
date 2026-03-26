@@ -3,14 +3,7 @@ import { useEffect, useState } from "react";
 import { Info } from "lucide-react";
 import icons8Plus from "../images/icons8-plus.svg";
 import MedicationTag from "./MedicationTag";
-
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
-const IS_LOCALHOST =
-  typeof window !== "undefined" &&
-  (window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1");
-const USE_BACKEND_PROXY = Boolean(import.meta.env.VITE_API_BASE_URL) || IS_LOCALHOST;
+import { fetchMedicationSuggestions } from "../openFdaApi";
 
 export default function SearchInput({ addedMedications, setAddedMedications }) {
   const [searchMedication, setSearchMedication] = useState("");
@@ -25,16 +18,8 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
     }
     async function fetchMedications() {
       try {
-        const medicationQuery = encodeURIComponent(searchMedication.trim());
-        const url = USE_BACKEND_PROXY
-          ? `${API_BASE_URL}/api/openfda/search?name=${medicationQuery}`
-          : `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${medicationQuery}*&limit=8`;
-        const response = await fetch(
-          url,
-        );
-        const data = await response.json();
-
-        const names = data.results
+        const results = await fetchMedicationSuggestions(searchMedication);
+        const names = results
           .map((result) =>
             result.openfda?.brand_name?.[0]?.split(",")[0].trim(),
           )
