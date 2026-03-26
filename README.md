@@ -12,7 +12,7 @@ check interactions with other medications, alcohol, food, and pregnancy risks.
   - Drug-Food
   - Pregnancy & Breastfeeding
   - General Warnings
-- JWT-protected REST API for managing medication data
+- JWT-protected REST API for managing medication data (In Progress...)
 - React frontend with real-time search and interaction analysis
 
 ## Tech stack
