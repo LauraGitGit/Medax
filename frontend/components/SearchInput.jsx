@@ -4,6 +4,9 @@ import { Info } from "lucide-react";
 import icons8Plus from "../images/icons8-plus.svg";
 import MedicationTag from "./MedicationTag";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+
 export default function SearchInput({ addedMedications, setAddedMedications }) {
   const [searchMedication, setSearchMedication] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -17,8 +20,9 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
     }
     async function fetchMedications() {
       try {
+        const medicationQuery = encodeURIComponent(searchMedication.trim());
         const response = await fetch(
-          `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${searchMedication}*&limit=8`,
+          `${API_BASE_URL}/api/openfda/search?name=${medicationQuery}`,
         );
         const data = await response.json();
 

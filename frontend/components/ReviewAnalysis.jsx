@@ -2,6 +2,9 @@ import "../styles/ReviewAnalysis.css";
 import { AlertTriangle, ShieldCheck, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+
 export default function ReviewAnalysis({ addedMedications, interactionType }) {
   const [results, setResults] = useState([]);
 
@@ -84,8 +87,9 @@ export default function ReviewAnalysis({ addedMedications, interactionType }) {
     async function fetchInteractions() {
       const allResults = await Promise.all(
         addedMedications.map(async (medication) => {
+          const medicationQuery = encodeURIComponent(medication);
           const response = await fetch(
-            `https://api.fda.gov/drug/label.json?search=openfda.brand_name:"${medication}"&limit=1`,
+            `${API_BASE_URL}/api/openfda/label?name=${medicationQuery}`,
           );
           const data = await response.json();
           return data.results?.[0];
