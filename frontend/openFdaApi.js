@@ -9,28 +9,44 @@ const IS_LOCALHOST =
 const USE_BACKEND_PROXY =
   Boolean(import.meta.env.VITE_API_BASE_URL) || IS_LOCALHOST;
 
-function getSearchUrl(medicationQuery) {
-  return USE_BACKEND_PROXY
-    ? `${API_BASE_URL}/api/openfda/search?name=${medicationQuery}`
-    : `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${medicationQuery}*&limit=8`;
+async function fetchJson(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data?.message || data?.error?.message || "Request failed");
+  }
+  return data;
 }
 
-function getLabelUrl(medicationQuery) {
-  return USE_BACKEND_PROXY
-    ? `${API_BASE_URL}/api/openfda/label?name=${medicationQuery}`
-    : `https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22${medicationQuery}%22&limit=1`;
+async function fetchWithBackendFallback(primaryUrl, fallbackUrl) {
+  try {
+    return await fetchJson(primaryUrl);
+  } catch (error) {
+    if (primaryUrl === fallbackUrl) {
+      throw error;
+    }
+    return fetchJson(fallbackUrl);
+  }
 }
 
 export async function fetchMedicationSuggestions(searchMedication) {
   const medicationQuery = encodeURIComponent(searchMedication.trim());
-  const response = await fetch(getSearchUrl(medicationQuery));
-  const data = await response.json();
+  const proxyUrl = `${API_BASE_URL}/api/openfda/search?name=${medicationQuery}`;
+  const directUrl = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${medicationQuery}*&limit=8`;
+  const data = await fetchWithBackendFallback(
+    USE_BACKEND_PROXY ? proxyUrl : directUrl,
+    directUrl,
+  );
   return data.results ?? [];
 }
 
 export async function fetchMedicationLabel(medication) {
   const medicationQuery = encodeURIComponent(medication);
-  const response = await fetch(getLabelUrl(medicationQuery));
-  const data = await response.json();
+  const proxyUrl = `${API_BASE_URL}/api/openfda/label?name=${medicationQuery}`;
+  const directUrl = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22${medicationQuery}%22&limit=1`;
+  const data = await fetchWithBackendFallback(
+    USE_BACKEND_PROXY ? proxyUrl : directUrl,
+    directUrl,
+  );
   return data.results?.[0] || null;
 }
