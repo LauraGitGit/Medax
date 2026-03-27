@@ -3,6 +3,20 @@
 A full-stack medication interaction checker. Search any drug and instantly
 check interactions with other medications, alcohol, food, and pregnancy risks.
 
+## 🚧 Work in Progress
+
+I'm currently working on polishing the frontend and building a user authentication system.
+The next version will allow users to:
+
+- 🔐 Create an account and securely save their medications (data stays private and is not shared)
+- 📋 Keep track of medications in a personal dashboard
+- ✏️ Edit and manage medication dosages with tailored information
+- 🔔 Smart safety reminders, including missed-dose guidance and overdose prevention warnings
+
+📝 **NOTE:** Currently, users can only **add or remove** medications. Direct editing of medication names is intentionally restricted for safety reasons - the app relies on **exact medication names** to fetch accurate information, and free-text edits could lead to incorrect results. Full edit functionality will be introduced once JWT-based authentication is implemented.
+
+More features coming soon!
+
 ## What it does
 
 - Search medications using the OpenFDA API

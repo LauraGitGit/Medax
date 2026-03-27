@@ -29,6 +29,7 @@ export default function ReviewAnalysis({ addedMedications, interactionType }) {
         "stroke",
         "allergy",
         "allergic",
+        "dosage",
       ],
       "drug-food": ["food", "milk", "eat", "stomach"],
       "drug-drug": ["drug", "medication", "medicine", "taking"],
