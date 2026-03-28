@@ -17,6 +17,10 @@ The next version will allow users to:
 
 More features coming soon!
 
+## Live demo
+
+[medax.github.io](https://lauragitgit.github.io/Medication-Interaction-API/)
+
 ## What it does
 
 - Search medications using the OpenFDA API
@@ -45,11 +49,6 @@ maintained by the U.S. Food & Drug Administration.
 > but requires a paid agreement (15,000 SEK/year). OpenFDA was chosen
 > as a free alternative with equivalent interaction data.
 
-## Live demo
-
-[medax.github.io](https://lauragitgit.github.io/Medication-Interaction-API/)
-
 ## Disclaimer
 
-This is a study project. Always consult your healthcare provider
-before making changes to your medication regimen.
+Drug interaction data is sourced from the U.S. Food & Drug Administration (OpenFDA). This is a study project — always consult your healthcare provider or pharmacist before making any changes to your medication regimen.
