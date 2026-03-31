@@ -19,7 +19,7 @@ More features coming soon!
 
 ## Live demo
 
-[medax.github.io](https://lauragitgit.github.io/Medication-Interaction-API/)
+[medax.github.io](https://lauragitgit.github.io/Medax/)
 
 ## What it does
 
