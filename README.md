@@ -46,7 +46,7 @@ Drug interaction data is sourced from the
 maintained by the U.S. Food & Drug Administration.
 
 > **Note:** FASS (Swedish drug database) was the preferred data source
-> but requires a paid agreement (15,000 SEK/year). OpenFDA was chosen
+> but requires a paid agreement. OpenFDA was chosen
 > as a free alternative with equivalent interaction data.
 
 ## Disclaimer
