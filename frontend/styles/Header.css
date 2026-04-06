@@ -1,79 +1,141 @@
 .app-header {
-  background: #fff1e4;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  background: #faebdc;
+  padding: 0.75rem 2rem;
+  border-radius: 999px;
+  display: flex;
   align-items: center;
-  border-radius: 20px;
+  justify-content: space-between;
+  gap: 1rem;
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 4rem);
+  max-width: 1200px;
+  z-index: 100;
 }
 
-.logo-section {
-  justify-self: start;
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.logo {
-  width: 220px;
-  height: 220px;
+.header-pill-logo {
+  width: 40px;
+  height: 40px;
   object-fit: contain;
-  display: block;
-  margin-left: 7rem;
+  border-radius: 50%;
 }
 
-.logo-text {
-  text-align: center;
-  margin-right: 7rem;
-}
-
-.logo-text h1 {
-  margin: 0;
-  font-size: 6rem;
+.header-brand-name {
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #de7b35;
+  color: #1a1a2e;
+  letter-spacing: 0.01em;
 }
 
-.logo-text p {
-  margin: 0.25rem 0 0 0;
-  color: #de7b35;
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header-nav-link {
   font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.header-spacer {
-  width: 220px;
-  height: 1px;
+.header-nav-link:hover {
+  color: #c8622a;
 }
 
-.mobile-rectangle-logo {
-  display: none;
+.header-nav-link--btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.header-cta {
+  flex-shrink: 0;
+  background-color: #de7b35;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease;
+}
+
+.header-cta:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+  .app-header {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .header-nav {
+    gap: 1.2rem;
+  }
 }
 
 @media (max-width: 768px) {
   .app-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    margin: 1.25rem 0;
-    height: 15vh;
+    border-radius: 1rem;
+    padding: 0.75rem 1.2rem;
+    top: 1rem;
+    width: calc(100% - 2rem);
   }
 
-  /* On mobile we only want the rectangle banner image */
-  .logo-section {
+  .header-nav {
     display: none;
   }
 
-  .logo-text {
-    display: none;
+  .header-brand-name {
+    font-size: 1.05rem;
   }
 
-  .header-spacer {
-    display: none;
+  .header-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.6rem 1rem;
+    top: 0.75rem;
+    width: calc(100% - 1.5rem);
+    gap: 0.5rem;
   }
 
-  .mobile-rectangle-logo {
-    display: block;
-    max-width: 300px;
-    max-height: 200px;
+  .header-pill-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .header-brand-name {
+    font-size: 0.95rem;
+  }
+
+  .header-cta {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.8rem;
   }
 }

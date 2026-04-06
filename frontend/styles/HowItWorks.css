@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap");
+
+.hiw-section {
+  border-radius: 2rem;
+  padding: 5rem 4rem;
+  margin-bottom: 2rem;
+  margin-left: -5rem;
+  margin-right: -5rem;
+  text-align: center;
+}
+
+.hiw-header {
+  margin-bottom: 4rem;
+}
+
+.hiw-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  background: #de7b35;
+  border: 1px solid #e0d8d0;
+  padding: 0.4rem 1.1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hiw-heading {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.15;
+  margin: 0;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.hiw-heading em {
+  font-style: italic;
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.hiw-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  position: relative;
+}
+
+.hiw-connector {
+  position: absolute;
+  z-index: 0;
+  top: 36px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  overflow: visible;
+}
+
+.hiw-path {
+  will-change: stroke-dashoffset;
+}
+
+.hiw-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hiw-icon-wrap {
+  width: 72px;
+  height: 72px;
+  background: #ffefe0;
+  border-radius: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #de7b35;
+  padding: 1rem;
+}
+
+.hiw-icon-wrap svg {
+  width: 80%;
+}
+
+.hiw-pill-icon {
+  width: calc(100% + 2rem);
+  height: calc(100% + 2rem);
+  object-fit: contain;
+}
+
+.hiw-step-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.hiw-step-desc {
+  font-size: 0.88rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 240px;
+}
+
+@media (max-width: 1024px) {
+  .hiw-section {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    padding: 4rem 2.5rem;
+  }
+
+  .hiw-heading {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hiw-section {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 1.5rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .hiw-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .hiw-heading {
+    font-size: 2rem;
+  }
+
+  .hiw-steps {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .hiw-icon-wrap {
+    width: 48px;
+    height: 48px;
+    padding: 0.5rem;
+  }
+
+  .hiw-connector {
+    display: none;
+  }
+
+  .hiw-step-desc {
+    max-width: 320px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .hiw-section {
+    padding: 2.5rem 1rem;
+    border-radius: 1.25rem;
+  }
+
+  .hiw-header {
+    margin-bottom: 2rem;
+  }
+
+  .hiw-heading {
+    font-size: 2rem;
+  }
+
+  .hiw-icon-wrap {
+    width: 48px;
+    height: 48px;
+    padding: 0.5rem;
+  }
+
+  .hiw-step-title {
+    font-size: 0.98rem;
+  }
+
+  .hiw-step-desc {
+    font-size: 0.84rem;
+    max-width: 280px;
+  }
+}

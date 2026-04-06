@@ -1,23 +1,56 @@
 import "../styles/Header.css";
-import logo from "../images/round-without-medax-background.png";
-import rectangleLogo from "../images/rectangle-with-background.png";
+import pillLogo from "../images/pill-logo.png";
+import { useNavigate, useLocation } from "react-router";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const onStepsPage = location.pathname === "/steps";
+
+  function handleNavLink(anchor) {
+    if (onStepsPage) {
+      window.location.href = `/#${anchor}`;
+    } else {
+      document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  const NAV_LINKS = [
+    { label: "How It Works", anchor: "how-it-works" },
+    { label: "About", anchor: "about" },
+    { label: "Download", anchor: "download" },
+    { label: "Contact", anchor: "contact" },
+  ];
+
   return (
     <header className="app-header">
-      <div className="logo-section">
-        <img src={logo} className="logo" alt="Medax Logo" />
-      </div>
-      <div className="logo-text">
-        <h1>Medax</h1>
-        <p>Intelligent medication interaction analysis.</p>
-      </div>
-      <div className="header-spacer" aria-hidden="true" />
-      <img
-        src={rectangleLogo}
-        className="mobile-rectangle-logo"
-        alt="Medax Logo"
-      />
+      <button
+        className="header-brand"
+        onClick={() =>
+          onStepsPage
+            ? navigate("/")
+            : window.scrollTo({ top: 0, behavior: "smooth" })
+        }
+      >
+        <img src={pillLogo} alt="Medax Logo" className="header-pill-logo" />
+        <span className="header-brand-name">Medax</span>
+      </button>
+
+      <nav className="header-nav">
+        {NAV_LINKS.map(({ label, anchor }) => (
+          <button
+            key={anchor}
+            className="header-nav-link header-nav-link--btn"
+            onClick={() => handleNavLink(anchor)}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
+
+      <button className="header-cta" onClick={() => navigate("/steps")}>
+        Let's Check
+      </button>
     </header>
   );
 }

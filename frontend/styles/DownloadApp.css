@@ -1,0 +1,303 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap");
+
+.da-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 2rem;
+  padding: 10rem 5rem;
+  margin-bottom: 2rem;
+  margin-left: -6rem;
+  margin-right: -6rem;
+  overflow: hidden;
+}
+
+.da-left {
+  flex: 1;
+  max-width: 460px;
+}
+
+.da-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 1.8rem;
+}
+
+.da-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #de7b35;
+  opacity: 0.6;
+}
+
+.da-dots span:last-child {
+  opacity: 1;
+}
+
+.da-heading {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.15;
+  margin: 0 0 1.2rem;
+}
+
+.da-subtext {
+  font-size: 0.92rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 0 0 2.2rem;
+  max-width: 380px;
+}
+
+.da-buttons {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.da-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: #fff;
+  border: 1.5px solid #e0d8d0;
+  border-radius: 14px;
+  padding: 1rem 2rem;
+  min-width: 200px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.1s;
+}
+
+.da-btn:hover {
+  border-color: #de7b35;
+  box-shadow: 0 4px 16px rgba(222, 123, 53, 0.12);
+  transform: translateY(-1px);
+}
+
+.store-icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  color: #de7b35;
+}
+
+.da-right {
+  position: relative;
+  flex-shrink: 0;
+  width: 320px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.da-blob {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  background: #f5dfc8;
+  border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.da-phone {
+  position: relative;
+  z-index: 1;
+  width: 230px;
+  height: 470px;
+  background: #1a1a1a;
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.da-phone-screen {
+  background: #fff;
+  border-radius: 36px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.da-phone-notch {
+  width: 80px;
+  height: 26px;
+  background: #1a1a1a;
+  border-radius: 0 0 20px 20px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.da-phone-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2.8rem 1.2rem 1rem;
+  text-align: center;
+}
+
+.da-app-logo {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  border-radius: 50%;
+  margin-top: -1.5rem;
+}
+
+.da-app-welcome {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.da-app-sub {
+  font-size: 0.72rem;
+  color: #888;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 160px;
+}
+
+.da-app-btn {
+  background: #de7b35;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: default;
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 1024px) {
+  .da-section {
+    margin-left: -3rem;
+    margin-right: -3rem;
+    padding: 6rem 3rem;
+  }
+
+  .da-heading {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .da-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0 4rem 0;
+    padding: 3rem 1.5rem 0;
+    overflow: visible;
+  }
+
+  .da-left {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .da-heading {
+    font-size: 2rem;
+  }
+
+  .da-subtext {
+    font-size: 0.88rem;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .da-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .da-btn {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+    min-width: unset;
+    padding: 0.9rem 1.5rem;
+  }
+
+  .da-right {
+    width: 100%;
+    height: 440px;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 4rem;
+  }
+
+  .da-phone {
+    position: relative;
+    z-index: 1;
+  }
+
+  .da-blob {
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+}
+
+@media (max-width: 480px) {
+  .da-section {
+    padding: 2.5rem 1.25rem 0;
+  }
+
+  .da-heading {
+    font-size: 2rem;
+  }
+
+  .da-right {
+    height: 380px;
+  }
+
+  .da-phone {
+    width: 190px;
+    height: 390px;
+    border-radius: 36px;
+  }
+
+  .da-phone-screen {
+    border-radius: 28px;
+  }
+
+  .da-blob {
+    width: 280px;
+    height: 280px;
+  }
+
+  .da-app-logo {
+    width: 85px;
+    height: 85px;
+  }
+}

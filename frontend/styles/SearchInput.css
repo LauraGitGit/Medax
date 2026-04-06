@@ -1,48 +1,126 @@
 .step-section {
-  background: #f8f8f8;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-}
-
-.step-title {
-  margin: 0 0 1.5rem 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #de7b35;
+  padding: 2.5rem 0 1rem;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 .step-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, #de7b35 0%, #b58a62 100%);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.813rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #fde8d8;
+  color: #c8622a;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.4rem;
 }
+
+.step-title {
+  margin: 0 0 0.75rem;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1a1a1a;
+}
+
+.step-title-highlight {
+  color: #c8622a;
+}
+
+.step-subtitle {
+  font-size: 0.95rem;
+  color: #777;
+  margin: 0 0 2rem;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
 .search-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.1rem;
+  color: #aaa;
+  pointer-events: none;
+  flex-shrink: 0;
 }
 
 .search-input {
   width: 100%;
-  padding: 1rem 1.25rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 14px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  padding: 1rem 5.5rem 1rem 3rem;
+  border: 1.5px solid #e5ddd3;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   outline: none;
-  background: #fafafa;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .search-input:focus {
-  border-color: #66bb6a;
-  background: white;
-  box-shadow: 0 0 0 4px rgba(102, 187, 106, 0.1);
+  border-color: #c8622a;
+  box-shadow: 0 0 0 3px rgba(200, 98, 42, 0.12);
+}
+
+.search-enter-hint {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #aaa;
+  background: #f3ede4;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.search-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 2.5rem;
+  color: #aaa;
+  text-align: center;
+}
+
+.search-empty-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: #fde8d8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c8622a;
+}
+
+.search-empty-state p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #999;
+}
+
+.search-empty-state kbd {
+  display: inline-block;
+  background: #f3ede4;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.78rem;
+  font-family: inherit;
+  font-weight: 600;
 }
 
 .dropdown-list {
@@ -75,9 +153,10 @@
   font-size: 0.95rem;
 }
 
-.dropdown-item:hover {
-  background: #f1f8e9;
-  color: #2e7d32;
+.dropdown-item:hover,
+.dropdown-item--highlighted {
+  background: #fde8d8;
+  color: #c8622a;
 }
 
 .dropdown-item:not(:last-child) {
@@ -170,50 +249,60 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 1024px) {
+  .step-title {
+    font-size: 2.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .step-section {
-    padding: 1rem;
-    text-align: center;
+    padding: 1.5rem 2rem;
   }
 
   .step-badge {
-    font-size: 0.7rem;
-    padding: 0.4rem 0.6rem;
+    font-size: 0.72rem;
+    padding: 0.4rem 0.75rem;
   }
 
   .step-title {
-    font-size: 1rem;
+    font-size: 2rem;
+  }
+
+  .step-subtitle {
+    font-size: 0.88rem;
   }
 
   .search-input {
     font-size: 16px;
-    padding: 0.7rem 1rem;
+    padding: 0.85rem 4.5rem 0.85rem 2.8rem;
   }
 
   .dropdown-item {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
+    padding: 0.85rem 1rem;
   }
 
   .dropdown-plus-icon {
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
   }
 
   .hint-box {
-    padding: 0.6rem;
-    gap: 0.4rem;
+    padding: 0.6rem 0.8rem;
+    gap: 0.5rem;
     align-items: flex-start;
     text-align: start;
   }
 
   .hint-box p {
-    font-size: 0.6rem;
+    font-size: 0.82rem;
   }
 
   .hint-box svg {
     width: 16px;
     height: 16px;
-    align-items: center;
+    flex-shrink: 0;
   }
 
   .added-medications-toolbar {
@@ -229,8 +318,49 @@
 
   .selection-button,
   .delete-selected-button {
-    font-size: 0.7rem;
-    padding: 0.4rem 0.6rem;
+    font-size: 0.72rem;
+    padding: 0.4rem 0.65rem;
     flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-section {
+    padding: 1.5rem 2rem;
+  }
+
+  .step-title {
+    font-size: 2rem;
+  }
+
+  .step-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-input {
+    font-size: 16px;
+    padding: 0.8rem 3rem 0.8rem 2.5rem;
+  }
+
+  .search-enter-hint {
+    display: none;
+  }
+
+  .hint-box {
+    padding: 0.55rem 0.7rem;
+  }
+
+  .hint-box p {
+    font-size: 0.8rem;
+  }
+
+  .dropdown-list {
+    max-height: 260px;
+  }
+
+  .dropdown-item {
+    font-size: 0.82rem;
+    padding: 0.75rem 0.9rem;
   }
 }

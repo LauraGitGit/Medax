@@ -1,99 +1,186 @@
-.tabs-step-section {
-  background: #f8f8f8;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  margin-top: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.it-section {
+  padding: 2.5rem 0 1rem;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
-.tabs-container {
+.it-heading {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1a1a1a;
+  margin: 0 0 0.75rem;
+}
+
+.it-heading-highlight {
+  color: #c8622a;
+}
+
+.it-subtitle {
+  font-size: 0.95rem;
+  color: #888;
+  margin: 0 0 2rem;
+  line-height: 1.6;
+}
+
+.it-list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  column-gap: 1.5rem;
-  row-gap: 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.it-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
-  margin: 0.75rem 0 0 0;
+  background: #ffffff;
+  border: 1.5px solid #ede8e0;
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.tab-button {
-  min-height: 90px;
+.it-row:hover {
+  border-color: #c8a882;
+  box-shadow: 0 2px 12px rgba(200, 98, 42, 0.08);
+}
+
+.it-row--active {
+  border-color: #c8622a;
+  box-shadow: 0 2px 16px rgba(200, 98, 42, 0.14);
+}
+
+.it-icon-box {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 12px;
+  background: #f3ede4;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  padding: 1rem 0.6rem;
-  border: 2px solid #d7d7d7;
-  border-radius: 16px;
-  background: #f5f5f5;
-  color: #6e6e6e;
-  font-size: 1.4rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  width: 160px;
-}
-
-.tab-button:hover {
-  border-color: #b9dfbe;
-  background: #eef9f0;
-}
-
-.tab-button.active {
-  background: linear-gradient(135deg, #87d58f 0%, #67be73 100%);
-  border-color: #67be73;
-  color: #ffffff;
-  box-shadow: 0 6px 16px rgba(103, 190, 115, 0.35);
-}
-
-.tab-button:disabled {
-  opacity: 1;
-  cursor: not-allowed;
-}
-
-.tab-button span {
-  font-size: 0.82rem;
-}
-
-.tab-button svg {
+  color: #7a6655;
   flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.it-row--active .it-icon-box {
+  background: #fde8d8;
+  color: #c8622a;
+}
+
+.it-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.it-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.it-desc {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.it-checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+  color: #fff;
+}
+
+.it-checkbox--checked {
+  border-color: #c8622a;
+  background: #c8622a;
+}
+
+.it-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.it-hint svg {
+  flex-shrink: 0;
+  color: #bbb;
+}
+
+@media (max-width: 1024px) {
+  .it-heading {
+    font-size: 2.5rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .tabs-step-section {
-    text-align: center;
+  .it-section {
+    padding: 1.5rem 2rem;
   }
 
-  .tabs-step-title {
-    font-size: 1.65rem;
+  .it-heading {
+    font-size: 2rem;
   }
 
-  .tabs-container {
-    row-gap: 1rem;
-    margin: 0.75rem;
+  .it-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
   }
 
-  .tab-button {
-    font-size: 0.9rem;
-    min-width: 100px;
-    min-height: 75px;
-    max-height: 75px;
-    max-width: 100px;
-    padding: 0.8rem 0.6rem;
-    width: auto;
+  .it-row {
+    padding: 0.9rem 1rem;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .it-section {
+    padding: 1.5rem 2rem;
   }
 
-  .tab-button span {
-    font-size: 0.7rem;
+  .it-heading {
+    font-size: 2rem;
   }
 
-  .tab-button svg {
-    width: 20px;
-    height: 20px;
+  .it-row {
+    padding: 0.8rem 0.9rem;
+    gap: 0.65rem;
+  }
+
+  .it-icon-box {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 10px;
+  }
+
+  .it-label {
+    font-size: 0.88rem;
+  }
+
+  .it-desc {
+    font-size: 0.76rem;
+  }
+
+  .it-hint {
+    font-size: 0.76rem;
+    margin-top: 1rem;
   }
 }

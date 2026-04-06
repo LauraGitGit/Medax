@@ -1,35 +1,205 @@
-.app-footer {
-  background: #edf6fb;
-  border-radius: 20px;
-  padding: 1rem 1.5rem;
-  border: 1px solid #d7e7f2;
-  box-shadow: 0 2px 10px rgba(23, 77, 112, 0.06);
-  margin: 2rem 0 0 0;
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&display=swap");
+
+.ft-wrap {
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-top: 5rem;
+  padding: 4.5rem 7rem 0;
+  overflow: hidden;
 }
 
-.footer-content {
+.ft-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.6fr;
+  gap: 2rem 3rem;
+  padding-bottom: 3rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ft-col {
   display: flex;
-  gap: 0.7rem;
-  color: #4a4a4a;
+  flex-direction: column;
+  gap: 0.55rem;
 }
 
-.footer-content svg {
-  flex-shrink: 0;
-  color: #d6ad2f;
+.ft-col-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.4rem;
 }
 
-.footer-content p {
-  margin: 0;
-  line-height: 1.55;
+.ft-email {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.ft-email:hover {
+  color: #c8622a;
+}
+
+.ft-copy {
   font-size: 0.8rem;
+  color: #888;
+  margin: 0.2rem 0 0;
+}
+
+.ft-link {
+  font-size: 0.88rem;
+  color: #444;
+  text-decoration: none;
+  transition: color 0.15s;
+  line-height: 1.4;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+.ft-link:hover {
+  color: #c8622a;
+}
+
+.ft-link--btn {
+  display: inline;
+}
+
+.ft-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.ft-disclaimer {
+  font-size: 0.78rem;
+  color: #888;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 320px;
+}
+
+.ft-divider {
+  height: 1px;
+  background: #e0d8ce;
+  margin: 0 -7rem;
+}
+
+.ft-brand {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(6rem, 19.5vw, 26rem);
+  line-height: 0.88;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  text-align: center;
+  padding: 0.1em 0 0;
+  margin: 0 -7rem;
+  overflow: hidden;
+  height: 0.85em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ft-wrap--minimal {
+  padding-top: 0;
+}
+
+@media (max-width: 900px) {
+  .ft-wrap {
+    padding: 3.5rem 2rem 0;
+  }
+
+  .ft-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .ft-col:nth-child(1) {
+    order: 3;
+  }
+  .ft-col:nth-child(2) {
+    order: 1;
+  }
+  .ft-col:nth-child(3) {
+    order: 2;
+  }
+  .ft-col:nth-child(4) {
+    order: 4;
+  }
+
+  .ft-divider {
+    margin: 0 -2rem;
+  }
+
+  .ft-brand {
+    margin: 0 -2rem;
+    font-size: clamp(4rem, 22vw, 14rem);
+  }
 }
 
 @media (max-width: 768px) {
-  .app-footer {
-    padding: 1rem 1.2rem;
+  .ft-wrap {
+    padding: 2.5rem 1.25rem 0;
+    margin-top: 0;
   }
 
-  .footer-content p {
-    font-size: 0.6rem;
+  .ft-grid {
+    gap: 2.5rem 0;
+  }
+
+  .ft-divider {
+    margin: 0 -1.25rem;
+  }
+
+  .ft-brand {
+    margin: 0 -1.25rem;
+    font-size: clamp(3.5rem, 22vw, 10rem);
+  }
+
+  .ft-email {
+    font-size: 1.1rem;
+  }
+
+  .ft-disclaimer {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .ft-wrap {
+    padding: 2rem 1rem 0;
+  }
+
+  .ft-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .ft-col:nth-child(1),
+  .ft-col:nth-child(2),
+  .ft-col:nth-child(3),
+  .ft-col:nth-child(4) {
+    order: unset;
+  }
+
+  .ft-divider {
+    margin: 0 -1rem;
+  }
+
+  .ft-brand {
+    margin: 0 -1rem;
+    font-size: clamp(3rem, 20vw, 8rem);
+  }
+
+  .ft-email {
+    font-size: 1rem;
   }
 }

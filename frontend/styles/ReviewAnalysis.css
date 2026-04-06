@@ -1,338 +1,223 @@
-/* Empty state card */
-
-.info-panel {
-  text-align: center;
-  padding: 3rem 2rem;
-  background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e9 100%);
-  border-radius: 16px;
-  border: 2px solid #c5e1a5;
+.ra-section {
+  padding: 2.5rem 0 1rem;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
-.info-icon {
-  display: inline-flex;
-  width: 80px;
-  height: 80px;
-  background: white;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  color: #66bb6a;
-  box-shadow: 0 4px 16px rgba(102, 187, 106, 0.2);
+.ra-heading {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1a1a1a;
+  margin: 0 0 0.75rem;
 }
 
-.info-panel h3 {
-  margin: 0 0 0.75rem 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2e7d32;
+.ra-heading-highlight {
+  color: #c8622a;
 }
 
-.info-panel p {
-  margin: 0;
-  color: #558b2f;
-  font-size: 1rem;
+.ra-subtitle {
+  font-size: 0.95rem;
+  color: #888;
+  margin: 0 0 2rem;
+  line-height: 1.6;
 }
 
-.step-three-section {
-  background: #f8f8f8;
+.ra-empty-card {
+  background: #f5f2ee;
+  border: 1.5px solid #e5ddd3;
   border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  margin-top: 1.25rem;
-  text-align: left;
-}
-
-.step-three-content {
-  border-radius: 18px;
-}
-
-.ready-state-card {
-  background: linear-gradient(135deg, #edf6ec 0%, #e6f1e4 100%);
-  border: 2px solid #c8dfc5;
-  border-radius: 18px;
-  padding: 2.5rem 2rem;
-  text-align: center;
-  color: #2f7b43;
-  margin: 0 1rem;
-}
-
-.ready-state-icon {
-  width: 92px;
-  height: 92px;
-  margin: 0 auto 1.25rem auto;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #5bae68;
-  background: #f7fbf6;
-  box-shadow: 0 8px 20px rgba(53, 119, 67, 0.08);
-}
-
-.ready-state-title {
-  margin: 0 0 0.75rem 0;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #2f7b43;
-}
-
-.ready-state-text {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #4e7a54;
-}
-
-/* Interactions List */
-.interactions-list {
+  padding: 3rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
 }
 
-.interaction-item {
-  background: white;
-  border: 2px solid;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-color: #81c784;
-  margin: 1rem;
+.ra-empty-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 14px;
+  background: #fde8d8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c8622a;
+  margin-bottom: 0.5rem;
 }
 
-.interaction-info {
-  padding: 1rem;
+.ra-empty-icon--pulse {
+  animation: pulse 1.4s ease-in-out infinite;
 }
 
-/* .fass-link {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 13px;
-  color: #1a5276;
-  text-decoration: none;
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
 }
 
-.fass-link:hover {
-  text-decoration: underline;
-} */
-
-.interaction-item:hover {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+.ra-empty-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
 }
 
-.interaction-item.selected {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+.ra-empty-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #999;
 }
 
-.interaction-summary {
+.ra-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ra-type-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ra-type-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #de7b35;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #ede8e0;
+}
+
+.ra-card {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1.2rem 1.3rem;
+  border: 1.5px solid;
+  border-radius: 16px;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
 }
 
-.interaction-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+.ra-card:hover {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.ra-card-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.severe .interaction-icon {
-  color: #940505;
-}
-
-.moderate .interaction-icon {
-  color: #e65100;
-}
-
-.mild .interaction-icon {
-  color: #f57f17;
-}
-
-.risk-badge {
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-}
-
-.risk-badge.severe {
-  background: #940505;
-  color: white;
-}
-
-.risk-badge.moderate {
-  background: #e65100;
-  color: white;
-}
-
-.risk-badge.mild {
-  background: #f57f17;
-  color: white;
-}
-
-.interaction-info {
+.ra-card-body {
   flex: 1;
-}
-
-.interaction-meds {
-  font-size: 0.813rem;
-  font-weight: 600;
-  color: #de7b35;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.375rem;
-}
-
-.interaction-title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #212121;
-  margin-bottom: 0.5rem;
-}
-
-.interaction-summary-text {
-  color: #616161;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-/* Interaction Details */
-.interaction-details {
-  border-top: 2px solid #f5f5f5;
-  padding: 1.5rem;
-  background: #fafafa;
-  animation: expandDown 0.3s ease;
-}
-
-@keyframes expandDown {
-  from {
-    opacity: 0;
-    max-height: 0;
-  }
-  to {
-    opacity: 1;
-    max-height: 500px;
-  }
-}
-
-.detail-section {
-  margin-bottom: 1.5rem;
-}
-
-.detail-section:last-of-type {
-  margin-bottom: 1rem;
-}
-
-.detail-header {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-  color: #2e7d32;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-.detail-header h4 {
+.ra-card-name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #c8622a;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ra-card-text {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.88rem;
+  color: #444;
+  line-height: 1.55;
+}
+
+.ra-badge {
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
+  color: #fff;
 }
 
-.detail-section p {
-  margin: 0;
-  color: #424242;
-  line-height: 1.7;
-  font-size: 0.9rem;
-}
-
-.meta-info {
-  display: flex;
-  gap: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e0e0e0;
-}
-
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #757575;
-  font-size: 0.813rem;
-}
-
-.meta-item svg {
-  color: #66bb6a;
+@media (max-width: 1024px) {
+  .ra-heading {
+    font-size: 2.5rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .step-three-section {
-    padding: 1rem;
-    text-align: center;
+  .ra-section {
+    padding: 1.5rem 2rem;
   }
 
-  .ready-state-icon {
-    width: 80px;
-    height: 75px;
-  }
-  .ready-state-title {
-    font-size: 1.5rem;
+  .ra-heading {
+    font-size: 2rem;
   }
 
-  .ready-state-text {
-    font-size: 0.9rem;
+  .ra-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
   }
 
-  .interaction-item {
-    margin-bottom: 1rem !important;
-    min-width: 280px;
-    margin: 0;
+  .ra-card {
+    padding: 1rem 1.1rem;
+    gap: 0.75rem;
   }
 
-  .interaction-summary {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas:
-      "icon spacer badge"
-      "content content content";
-    align-items: start;
-    gap: 0.1rem;
-    padding: 0.5rem;
+  .ra-card-text {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ra-section {
+    padding: 1.5rem 2rem;
   }
 
-  .interaction-summary-text {
-    font-size: 0.8rem;
+  .ra-heading {
+    font-size: 2rem;
   }
 
-  .interaction-info {
-    grid-area: content;
-    text-align: center;
-    margin-top: 0;
+  .ra-card {
+    flex-wrap: wrap;
+    padding: 0.9rem 1rem;
+    gap: 0.6rem;
   }
 
-  .risk-badge {
-    grid-area: badge;
-    position: static;
-    justify-self: end;
-    align-self: start;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.4rem;
+  .ra-badge {
+    align-self: flex-end;
   }
 
-  .interaction-icon {
-    grid-area: icon;
-    width: 22px;
-    height: 22px;
-    margin: 0;
+  .ra-card-icon {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 8px;
+  }
+
+  .ra-empty-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .ra-results {
+    gap: 1.25rem;
   }
 }

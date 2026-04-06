@@ -1,10 +1,22 @@
 import "../styles/ReviewAnalysis.css";
-import { AlertTriangle, ShieldCheck, ArrowRight } from "lucide-react";
+import { Activity, AlertTriangle, ShieldCheck } from "lucide-react";
 import { useState, useEffect } from "react";
 import { fetchMedicationLabel } from "../openFdaApi";
 
-export default function ReviewAnalysis({ addedMedications, interactionType }) {
+const TYPE_LABELS = {
+  "drug-drug": "Drug-Drug",
+  "drug-alcohol": "Drug-Alcohol",
+  "drug-food": "Drug-Food",
+  "pregnancy-breastfeeding": "Pregnancy & Breastfeeding",
+  warnings: "Warnings",
+};
+
+export default function ReviewAnalysis({
+  addedMedications,
+  interactionTypes = [],
+}) {
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const FDA_FIELD_MAP = {
     "drug-drug": "ask_doctor_or_pharmacist",
@@ -16,9 +28,7 @@ export default function ReviewAnalysis({ addedMedications, interactionType }) {
 
   function extractRelevantText(text, type) {
     if (!text) return null;
-
     const sentences = text.split(/\.|\n/).filter(Boolean);
-
     const keywords = {
       "drug-alcohol": ["alcohol", "drinking"],
       warnings: [
@@ -35,15 +45,9 @@ export default function ReviewAnalysis({ addedMedications, interactionType }) {
       "drug-drug": ["drug", "medication", "medicine", "taking"],
       "pregnancy-breastfeeding": ["pregnant", "pregnancy", "breast", "nursing"],
     };
-
-    const relevantKeywords = keywords[type] || [];
-
-    const relevant = sentences.filter((sentence) =>
-      relevantKeywords.some((keyword) =>
-        sentence.toLowerCase().includes(keyword),
-      ),
+    const relevant = sentences.filter((s) =>
+      (keywords[type] || []).some((kw) => s.toLowerCase().includes(kw)),
     );
-
     return relevant.length > 0
       ? relevant.slice(0, 2).join(". ").trim() + "."
       : sentences[0];
@@ -51,9 +55,7 @@ export default function ReviewAnalysis({ addedMedications, interactionType }) {
 
   function getSeverity(text) {
     if (!text) return "mild";
-
     const lower = text.toLowerCase();
-
     if (
       lower.includes("severe") ||
       lower.includes("serious") ||
@@ -62,7 +64,6 @@ export default function ReviewAnalysis({ addedMedications, interactionType }) {
       lower.includes("death")
     )
       return "severe";
-
     if (
       lower.includes("risk") ||
       lower.includes("bleeding") ||
@@ -73,113 +74,148 @@ export default function ReviewAnalysis({ addedMedications, interactionType }) {
       lower.includes("warning")
     )
       return "moderate";
-
     return "mild";
   }
 
   useEffect(() => {
-    if (addedMedications.length === 0) {
+    if (addedMedications.length === 0 || interactionTypes.length === 0) {
       setResults([]);
       return;
     }
-
+    setLoading(true);
     async function fetchInteractions() {
       const allResults = await Promise.all(
-        addedMedications.map(async (medication) => {
-          return fetchMedicationLabel(medication);
-        }),
+        addedMedications.map((med) => fetchMedicationLabel(med)),
       );
       setResults(allResults.filter(Boolean));
+      setLoading(false);
     }
-
     fetchInteractions();
-  }, [addedMedications, interactionType]);
+  }, [addedMedications, interactionTypes]);
+
+  const SEVERITY_COLOR = {
+    severe: {
+      bg: "#fff0f0",
+      border: "#f5c0c0",
+      badge: "#c0392b",
+      icon: "#c0392b",
+    },
+    moderate: {
+      bg: "#fff7f0",
+      border: "#f5d9c0",
+      badge: "#c8622a",
+      icon: "#c8622a",
+    },
+    mild: {
+      bg: "#f7fbf5",
+      border: "#c8dfc5",
+      badge: "#4a9b5f",
+      icon: "#4a9b5f",
+    },
+  };
 
   return (
-    <div className="step-three-section">
-      <span className="step-badge">Step 3</span>
-      <h2 className="step-title">Review Analysis</h2>
+    <section className="ra-section">
+      <span className="step-badge">✦ Step 3 of 3</span>
 
-      {addedMedications.length === 0 ? (
-        <section className="ready-state-card" aria-live="polite">
-          <div className="ready-state-icon">
-            <ShieldCheck size={30} aria-hidden="true" />
+      <h1 className="ra-heading">
+        Review your
+        <br />
+        <span className="ra-heading-highlight">analysis</span>
+      </h1>
+      <p className="ra-subtitle">
+        Here's a summary of your selections and results.
+      </p>
+
+      {addedMedications.length === 0 && (
+        <div className="ra-empty-card" aria-live="polite">
+          <div className="ra-empty-icon">
+            <Activity size={26} aria-hidden="true" />
           </div>
-          <h3 className="ready-state-title">Ready to Analyze</h3>
-          <p className="ready-state-text">
-            Add at least 1 medication to check for medication interactions
+          <h3 className="ra-empty-title">No medications added</h3>
+          <p className="ra-empty-text">
+            Go back to Step 1 to add your medications first.
           </p>
-        </section>
-      ) : !interactionType ? (
-        <section className="ready-state-card" aria-live="polite">
-          <div className="ready-state-icon">
-            <ShieldCheck size={30} aria-hidden="true" />
-          </div>
-          <h3 className="ready-state-title">Choose an Interaction</h3>
-          <p className="ready-state-text">
-            Select one of the interaction tabs to see the analysis
-          </p>
-        </section>
-      ) : results.length === 0 ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="results-list">
-          {results.map((result, index) => {
-            const fieldName = FDA_FIELD_MAP[interactionType];
-            const interactionText = extractRelevantText(
-              result?.[fieldName]?.[0],
-              interactionType,
-            );
-            const medName =
-              result?.openfda?.brand_name?.[0] || addedMedications[index];
-            const severity = getSeverity(interactionText);
-            const SeverityIcon =
-              severity === "mild" ? ShieldCheck : AlertTriangle;
-
-            if (!interactionText) {
-              return (
-                <article key={index} className="interaction-item">
-                  <div className="interaction-info">
-                    <div className="interaction-meds">{medName}</div>
-                    <div className="interaction-summary-text">
-                      No {interactionType} interaction data found.
-                    </div>
-                  </div>
-                </article>
-              );
-            }
-
-            return (
-              <article key={index} className={`interaction-item ${severity}`}>
-                <div className="interaction-summary">
-                  <div className="interaction-icon">
-                    <SeverityIcon size={28} aria-hidden="true" />
-                  </div>
-                  <div className="interaction-info">
-                    <div className="interaction-meds">{medName}</div>
-                    <div className="interaction-summary-text">
-                      {interactionText}
-                    </div>
-
-                    {/* TODO: Add FASS link when FASS URL is ready */}
-                    {/*
-                    <a
-                      href={`https://www.fass.se/LIF/substance?userType=0&query=${medName}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="fass-link"
-                    >
-                      View on FASS <ArrowRight size={16} aria-hidden="true" />
-                    </a>
-                    */}
-                  </div>
-                  <span className={`risk-badge ${severity}`}>{severity}</span>
-                </div>
-              </article>
-            );
-          })}
         </div>
       )}
-    </div>
+
+      {addedMedications.length > 0 && interactionTypes.length === 0 && (
+        <div className="ra-empty-card" aria-live="polite">
+          <div className="ra-empty-icon">
+            <Activity size={26} aria-hidden="true" />
+          </div>
+          <h3 className="ra-empty-title">No concern selected</h3>
+          <p className="ra-empty-text">
+            Go back to Step 2 to choose an interaction type.
+          </p>
+        </div>
+      )}
+
+      {loading && (
+        <div className="ra-empty-card">
+          <div className="ra-empty-icon ra-empty-icon--pulse">
+            <Activity size={26} aria-hidden="true" />
+          </div>
+          <h3 className="ra-empty-title">Analyzing…</h3>
+          <p className="ra-empty-text">Fetching data from the FDA database.</p>
+        </div>
+      )}
+
+      {!loading && results.length > 0 && (
+        <div className="ra-results">
+          {interactionTypes.map((type) => (
+            <div key={type} className="ra-type-group">
+              <h2 className="ra-type-label">{TYPE_LABELS[type]}</h2>
+              {results.map((result, index) => {
+                const fieldName = FDA_FIELD_MAP[type];
+                const interactionText = extractRelevantText(
+                  result?.[fieldName]?.[0],
+                  type,
+                );
+                const medName =
+                  result?.openfda?.brand_name?.[0] || addedMedications[index];
+                const severity = getSeverity(interactionText);
+                const colors = SEVERITY_COLOR[severity];
+                const SeverityIcon =
+                  severity === "mild" ? ShieldCheck : AlertTriangle;
+
+                return (
+                  <article
+                    key={index}
+                    className="ra-card"
+                    style={{
+                      background: colors.bg,
+                      borderColor: colors.border,
+                    }}
+                  >
+                    <div
+                      className="ra-card-icon"
+                      style={{ color: colors.icon }}
+                    >
+                      <SeverityIcon size={22} aria-hidden="true" />
+                    </div>
+
+                    <div className="ra-card-body">
+                      <span className="ra-card-name">{medName}</span>
+                      <p className="ra-card-text">
+                        {interactionText ||
+                          `No ${type} interaction data found.`}
+                      </p>
+                    </div>
+
+                    <span
+                      className="ra-badge"
+                      style={{ background: colors.badge }}
+                    >
+                      {severity}
+                    </span>
+                  </article>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }

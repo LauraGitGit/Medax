@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap");
+
+.mm-section {
+  background: #f5ede2;
+  margin-left: -25rem;
+  margin-right: -25rem;
+  border-radius: 0;
+  margin-bottom: 0;
+  padding: 4rem 4rem 0 4rem;
+}
+
+.mm-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  background: #de7b35;
+  border: 1px solid #e0d8d0;
+  padding: 0.4rem 1.1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.mm-pills-clip {
+  overflow: hidden;
+  padding-top: 32px;
+  margin-top: -32px;
+}
+
+.mm-pills-arena {
+  position: relative;
+  min-height: 160px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .mm-section {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding: 3rem 1.5rem 3rem;
+  }
+
+  .mm-heading {
+    font-size: 2rem !important;
+  }
+
+  .mm-pills-arena {
+    position: static;
+    min-height: unset;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 14px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mm-pills-arena > * {
+    position: static !important;
+    left: unset !important;
+    top: unset !important;
+    height: 38px !important;
+    font-size: 12px !important;
+    padding: 0 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .mm-pills-arena > * {
+    height: 34px !important;
+    font-size: 11px !important;
+    padding: 0 12px !important;
+  }
+}
