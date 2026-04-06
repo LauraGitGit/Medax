@@ -53,7 +53,14 @@ export default function StepsPage() {
   }
 
   function handleNext() {
-    if (currentStep < TOTAL_STEPS - 1) setCurrentStep((s) => s + 1);
+    if (currentStep < TOTAL_STEPS - 1) {
+      setCurrentStep((s) => s + 1);
+    } else {
+      setAddedMedications([]);
+      setInteractionTypes([]);
+      localStorage.removeItem(STORAGE_KEY);
+      setCurrentStep(0);
+    }
   }
 
   const STEP_LABELS = [
