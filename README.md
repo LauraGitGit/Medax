@@ -19,7 +19,7 @@ More features coming soon!
 
 ## Live demo
 
-[medax.github.io](https://lauragitgit.github.io/Medax/)
+https://medax-nu.vercel.app/
 
 ## What it does
 
