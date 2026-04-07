@@ -76,7 +76,7 @@ export default function CallToAction() {
             className="cta-btn-outline"
             onClick={() =>
               document
-                .getElementById("how-it-works")
+                .getElementById("about-medax")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >

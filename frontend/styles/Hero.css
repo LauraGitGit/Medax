@@ -51,7 +51,7 @@
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0;
-  max-width: 700px;
+  max-width: 825px;
 }
 
 .badge {
@@ -75,14 +75,14 @@
 }
 
 .badge-pos-1 {
-  top: 1.6rem;
-  right: 3%;
+  top: 0.6rem;
+  right: 5%;
   transform: rotate(3deg);
 }
 
 .badge-pos-2 {
-  bottom: 1.6rem;
-  left: 22%;
+  bottom: 1.3rem;
+  left: 39%;
   transform: rotate(-2.5deg);
 }
 
@@ -103,8 +103,8 @@
 .hero-subtext {
   font-size: 0.9rem;
   color: #666;
-  margin: 0;
-  max-width: 420px;
+  margin: 1rem;
+  max-width: 640px;
   text-align: center;
 }
 

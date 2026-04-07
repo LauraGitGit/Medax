@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "../components/Header.jsx";
 import Hero from "../components/Hero.jsx";
+import WhatIsMedax from "../components/WhatIsMedax.jsx";
 import HowItWorks from "../components/HowItWorks.jsx";
 import MedicationManager from "../components/MedicationManager.jsx";
 import DownloadApp from "../components/DownloadApp.jsx";
@@ -30,6 +31,7 @@ export default function HomePage() {
     <div className="app-container">
       <Header />
       <Hero />
+      <WhatIsMedax />
       <HowItWorks />
       <MedicationManager />
       <DownloadApp />

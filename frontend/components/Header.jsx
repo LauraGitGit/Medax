@@ -16,8 +16,8 @@ export default function Header() {
   }
 
   const NAV_LINKS = [
+    { label: "About", anchor: "about-medax" },
     { label: "How It Works", anchor: "how-it-works" },
-    { label: "About", anchor: "about" },
     { label: "Download", anchor: "download" },
     { label: "Contact", anchor: "contact" },
   ];

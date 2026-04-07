@@ -25,19 +25,18 @@ export default function DownloadApp() {
           <span />
           <span />
         </div>
-        <h2 className="da-heading">Download Our App</h2>
+        <h2 className="da-heading">What's Next</h2>
         <p className="da-subtext">
-          Check drug interactions on the go. Medax gives you instant, reliable
-          medication safety insights — anytime, anywhere. Don't guess, check.
+          A future mobile app of Medax could help users access medication safety
+          information more quickly when practical questions come up in daily
+          life.
         </p>
         <div className="da-buttons">
           <button className="da-btn">
             <AppleIcon />
-            Download Now
           </button>
           <button className="da-btn">
             <AndroidIcon />
-            Download Now
           </button>
         </div>
       </div>

@@ -7,13 +7,13 @@ import heroVideo from "../images/6471440-uhd_4096_2160_25fps.mp4";
 const PHASES = [
   {
     tag: "DRUG SAFETY",
-    heading: "Know what you're taking\nbefore it's too late.",
+    heading: "Got a prescription,\n but still unsure?",
   },
   {
     tag: "INTERACTIONS",
-    heading: "Every drug. Every interaction.\nChecked in seconds.",
+    heading: "Check interactions, \nand safety risks more clearly",
   },
-  { tag: "STAY SAFE", heading: "Don't guess.\nCheck with Medax." },
+  { tag: "STAY SAFE", heading: "Don't guess. Check.\n - Medax." },
 ];
 
 function ease(t) {
@@ -83,17 +83,18 @@ export default function Hero() {
           <div className="hero-heading-wrap">
             <span className="badge badge-orange badge-pos-1">DRUG SAFETY</span>
             <h1 className="hero-heading">
-              From solo checks
+              Check medication risks
               <br />
-              to smart analysis
+              more clearly
             </h1>
-            <span className="badge badge-olive badge-pos-2">INTERACTIONS</span>
+            {/* <span className="badge badge-olive badge-pos-2">INTERACTIONS</span> */}
           </div>
         </div>
 
         <div className="hero-below-video" style={{ opacity: staticOpacity }}>
           <p className="hero-subtext">
-            Intelligent medication interaction analysis. Don't guess. Check.
+            Understand interactions and safety risks without digging through
+            confusing medical information.
           </p>
           <div className="hero-buttons">
             <button

@@ -4,7 +4,6 @@ import Header from "../components/Header.jsx";
 import SearchInput from "../components/SearchInput.jsx";
 import InteractionType from "../components/InteractionType.jsx";
 import ReviewAnalysis from "../components/ReviewAnalysis.jsx";
-import Footer from "../components/Footer.jsx";
 import "../styles/App.css";
 
 const STORAGE_KEY = "medax_added_medications";
@@ -145,8 +144,6 @@ export default function StepsPage() {
       >
         ↑
       </button>
-
-      <Footer minimal />
     </div>
   );
 }
