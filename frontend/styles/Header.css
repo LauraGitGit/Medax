@@ -8,8 +8,10 @@
   gap: 1rem;
   position: fixed;
   top: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: calc(100% - 4rem);
   max-width: 1200px;
   z-index: 100;
@@ -85,6 +87,118 @@
   transform: translateY(-1px);
 }
 
+.header-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.4rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: rgba(200, 98, 42, 0.12);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.header-burger-bar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #1a1a2e;
+  border-radius: 1px;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.header-mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 46, 0.35);
+  z-index: 998;
+}
+
+.header-mobile-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: #fff2eb;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 2rem 2rem;
+  animation: header-slide-in 0.22s ease;
+}
+
+@keyframes header-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.header-mobile-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e8e0d8;
+}
+
+.header-mobile-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.header-mobile-close {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.06);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #333;
+  cursor: pointer;
+}
+
+.header-mobile-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.header-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.header-mobile-link {
+  text-align: left;
+  padding: 0.9rem 0.75rem;
+  border: none;
+  border-radius: 0.65rem;
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.header-mobile-link:hover {
+  background: rgba(200, 98, 42, 0.1);
+  color: #c8622a;
+}
+
 @media (max-width: 1024px) {
   .app-header {
     padding: 0.75rem 1.5rem;
@@ -103,8 +217,12 @@
     width: calc(100% - 2rem);
   }
 
-  .header-nav {
+  .header-nav--desktop {
     display: none;
+  }
+
+  .header-burger {
+    display: flex;
   }
 
   .header-brand-name {
@@ -137,5 +255,10 @@
   .header-cta {
     padding: 0.5rem 0.8rem;
     font-size: 0.7rem;
+  }
+
+  .header-burger {
+    width: 2.35rem;
+    height: 2.35rem;
   }
 }
