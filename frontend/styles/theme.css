@@ -1,3 +1,4 @@
+/* REVIEW: Rich token set may be unused if components rely on bespoke hex colors—consolidate or remove dead variables. */
 @custom-variant dark (&:is(.dark *));
 
 :root {

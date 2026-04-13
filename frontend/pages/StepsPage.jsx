@@ -21,6 +21,7 @@ export default function StepsPage() {
   }, []);
 
   useEffect(() => {
+    // REVIEW: Same as HomePage—prefer scroll behavior "auto" for broader browser compatibility.
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [currentStep]);
 
@@ -76,6 +77,7 @@ export default function StepsPage() {
         ← Home
       </button>
 
+      {/* REVIEW: Step nav lets users jump to any step without completing prior steps—state can disagree with Next button rules. */}
       <nav className="step-nav" aria-label="Steps">
         {STEP_LABELS.map((label, i) => (
           <button

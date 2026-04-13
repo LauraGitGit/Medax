@@ -1,3 +1,5 @@
+/* REVIEW: Autocomplete dropdown stacking vs sticky header—verify z-index when both are visible on small viewports. */
+
 .step-section {
   padding: 2.5rem 0 1rem;
   max-width: 680px;

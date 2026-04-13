@@ -1,2 +1,3 @@
+/* REVIEW: tw-animate-css is imported—ensure bundle size is acceptable for the few animations actually used. */
 @import "tailwindcss";
 @import "tw-animate-css";

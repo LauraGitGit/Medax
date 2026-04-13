@@ -1,3 +1,4 @@
+/* REVIEW: font.css only holds a placeholder comment—consolidate @font-face / Google font imports here or drop the import. */
 @import "./font.css";
 @import "./tailwind.css";
 @import "./theme.css";

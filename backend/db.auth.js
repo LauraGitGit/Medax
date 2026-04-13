@@ -1,11 +1,13 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
+// REVIEW: Hardcoded connection string; use process.env.MONGO_URI for deployability and secrets hygiene.
 const client = new MongoClient("mongodb://localhost:27017");
 
 let medication; //data collection
 let users; //users collection
 
 // Connect to database
+// REVIEW: connect() is awaited on every exported function call—prefer connect once at startup or lazy singleton to avoid overhead.
 async function connect() {
   await client.connect();
   console.log("Connected to database");
@@ -24,6 +26,7 @@ async function createUser(userData) {
     email: userData.email,
     passwordHash: userData.passwordHash,
     isVerified: false,
+    // REVIEW: Inconsistent with createMedicationsBulk (ISO string); prefer Date or ISO everywhere for querying/sorting.
     createdAt: new Date().toString(),
   };
 

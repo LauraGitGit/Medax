@@ -1,3 +1,5 @@
+<!-- REVIEW: package.json name typo "medication-intercation-api"; README claims JWT API in progress but backend/app.js has no auth routes yet. -->
+
 # Medax — Don't guess, check.
 
 A full-stack medication interaction checker. Search any drug and instantly
@@ -16,6 +18,16 @@ The next version will allow users to:
 📝 **NOTE:** Currently, users can only **add or remove** medications. Direct editing of medication names is intentionally restricted for safety reasons - the app relies on **exact medication names** to fetch accurate information, and free-text edits could lead to incorrect results. Full edit functionality will be introduced once JWT-based authentication is implemented.
 
 More features coming soon!
+
+### UI polish (constructive notes)
+
+The layout and visual hierarchy are already good, a few details will make the experience feel much more intentional:
+
+- **In-page links and the header:** When you use “About” (or other nav links that scroll to a section), the **sticky navbar sits on top of the section title** (e.g. “About Medax”), so the heading looks cut off or hidden. Try adding **`scroll-margin-top`** on the target sections (or padding-top on the section) so scroll position lands _below_ the header, or use a small scroll offset in JS—either approach fixes “I clicked About but I can’t read the title.”
+
+- **Labels vs buttons:** Several bits of UI **look like tappable buttons** (pills, badges, outlined chips) but **aren’t clickable**. Users will still try to click them. Either make them clearly **static** (e.g. softer fill, no shadow, smaller contrast with real buttons) or turn them into real controls if they should do something. Consistent “this is text / this is an action” styling.
+
+- **Footer “Medax” treatment:** The large **Medax wordmark at the bottom** is **clipped by the bottom padding / overflow** so no letter reads cleanly. Worth checking **`overflow`**, **`padding-bottom`**, and **`line-height`** on that footer block so the decorative type has enough spacing.
 
 ## Live demo
 

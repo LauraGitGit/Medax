@@ -32,6 +32,7 @@ export default function DownloadApp() {
           life.
         </p>
         <div className="da-buttons">
+          {/* REVIEW: Store buttons have no aria-label, href, or disabled state—screen readers announce unlabeled controls. */}
           <button className="da-btn">
             <AppleIcon />
           </button>

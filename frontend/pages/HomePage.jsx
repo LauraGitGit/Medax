@@ -9,6 +9,7 @@ import CallToAction from "../components/CallToAction.jsx";
 import Footer from "../components/Footer.jsx";
 import "../styles/App.css";
 
+// REVIEW: App.css is also imported in App.jsx—duplicate global import; keep a single entry to avoid confusion.
 export default function HomePage() {
   const [visible, setVisible] = useState(false);
 
@@ -23,12 +24,14 @@ export default function HomePage() {
     if (!hash) return;
     const el = document.getElementById(hash);
     if (el) {
+      // REVIEW: behavior "instant" is non-standard; TypeScript DOM typings expect "auto" | "smooth"—verify Safari support.
       el.scrollIntoView({ behavior: "instant" });
     }
   }, []);
 
   return (
     <div className="app-container">
+      {/* No <main>: add one landmark wrapping primary content (e.g. Hero through CallToAction) and keep Header/Footer or utilities outside for skip-link / screen-reader flow. */}
       <Header />
       <Hero />
       <WhatIsMedax />

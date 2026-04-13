@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap");
+/* REVIEW: Pill positions use percentage left/top—verify overflow clipping on narrow viewports (mm-pills-clip). */
 
 .mm-section {
   background: #f5ede2;

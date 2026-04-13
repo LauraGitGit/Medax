@@ -1,3 +1,5 @@
+/* REVIEW: Selection mode styles rely on .selected on .pill—ensure focus outlines remain visible for keyboard users. */
+
 .added-medications {
   padding: 1rem;
   margin-top: 1rem;

@@ -18,6 +18,7 @@ export default function ReviewAnalysis({
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // REVIEW: OpenFDA label fields vary by SPL; top-level keys may be missing—validate mapping against real API payloads.
   const FDA_FIELD_MAP = {
     "drug-drug": "ask_doctor_or_pharmacist",
     "drug-alcohol": "warnings",
@@ -83,6 +84,7 @@ export default function ReviewAnalysis({
       return;
     }
     setLoading(true);
+    // REVIEW: If any fetchMedicationLabel rejects, loading never clears—wrap in try/finally and show an error state.
     async function fetchInteractions() {
       const allResults = await Promise.all(
         addedMedications.map((med) => fetchMedicationLabel(med)),
@@ -172,6 +174,7 @@ export default function ReviewAnalysis({
                   result?.[fieldName]?.[0],
                   type,
                 );
+                // REVIEW: Index ties result to addedMedications order—fragile if Promise.all result order diverges from filters.
                 const medName =
                   result?.openfda?.brand_name?.[0] || addedMedications[index];
                 const severity = getSeverity(interactionText);
@@ -180,36 +183,39 @@ export default function ReviewAnalysis({
                   severity === "mild" ? ShieldCheck : AlertTriangle;
 
                 return (
-                  <article
-                    key={index}
-                    className="ra-card"
-                    style={{
-                      background: colors.bg,
-                      borderColor: colors.border,
-                    }}
-                  >
-                    <div
-                      className="ra-card-icon"
-                      style={{ color: colors.icon }}
+                  <>
+                    {/* REVIEW: Prefer stable keys (e.g. medName + type) over index when list order can change. */}
+                    <article
+                      key={index}
+                      className="ra-card"
+                      style={{
+                        background: colors.bg,
+                        borderColor: colors.border,
+                      }}
                     >
-                      <SeverityIcon size={22} aria-hidden="true" />
-                    </div>
+                      <div
+                        className="ra-card-icon"
+                        style={{ color: colors.icon }}
+                      >
+                        <SeverityIcon size={22} aria-hidden="true" />
+                      </div>
 
-                    <div className="ra-card-body">
-                      <span className="ra-card-name">{medName}</span>
-                      <p className="ra-card-text">
-                        {interactionText ||
-                          `No ${type} interaction data found.`}
-                      </p>
-                    </div>
+                      <div className="ra-card-body">
+                        <span className="ra-card-name">{medName}</span>
+                        <p className="ra-card-text">
+                          {interactionText ||
+                            `No ${type} interaction data found.`}
+                        </p>
+                      </div>
 
-                    <span
-                      className="ra-badge"
-                      style={{ background: colors.badge }}
-                    >
-                      {severity}
-                    </span>
-                  </article>
+                      <span
+                        className="ra-badge"
+                        style={{ background: colors.badge }}
+                      >
+                        {severity}
+                      </span>
+                    </article>
+                  </>
                 );
               })}
             </div>

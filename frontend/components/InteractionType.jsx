@@ -1,5 +1,13 @@
 import "../styles/InteractionType.css";
-import { AlertTriangle, Apple, Baby, Check, Info, Link, Wine } from "lucide-react";
+import {
+  AlertTriangle,
+  Apple,
+  Baby,
+  Check,
+  Info,
+  Link,
+  Wine,
+} from "lucide-react";
 
 const INTERACTION_TYPES = [
   {
@@ -39,20 +47,23 @@ export default function InteractionType({
   setInteractionTypes,
   addedMedications = [],
 }) {
-  const hasAddedMeds = Array.isArray(addedMedications) && addedMedications.length > 0;
+  const hasAddedMeds =
+    Array.isArray(addedMedications) && addedMedications.length > 0;
 
   function toggleType(id) {
     setInteractionTypes((prev) =>
-      prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id],
     );
   }
+  // REVIEW: "Drug-Drug" analysis still only shows per-medication FDA snippets—no pairwise interaction matrix between selected drugs.
 
   return (
     <section className="it-section">
       <span className="step-badge">✦ Step 2 of 3</span>
 
       <h1 className="it-heading">
-        What are you<br />
+        What are you
+        <br />
         <span className="it-heading-highlight">concerned</span> about?
       </h1>
       <p className="it-subtitle">
@@ -81,8 +92,12 @@ export default function InteractionType({
                 <span className="it-desc">{option.description}</span>
               </div>
 
-              <div className={`it-checkbox ${isActive ? "it-checkbox--checked" : ""}`}>
-                {isActive && <Check size={12} strokeWidth={3} aria-hidden="true" />}
+              <div
+                className={`it-checkbox ${isActive ? "it-checkbox--checked" : ""}`}
+              >
+                {isActive && (
+                  <Check size={12} strokeWidth={3} aria-hidden="true" />
+                )}
               </div>
             </button>
           );
@@ -95,8 +110,8 @@ export default function InteractionType({
           {interactionTypes.length > 0
             ? `${interactionTypes.length} concern${interactionTypes.length > 1 ? "s" : ""} selected`
             : hasAddedMeds
-            ? "Select at least one concern to continue"
-            : "Add at least 1 medication first, then select a concern"}
+              ? "Select at least one concern to continue"
+              : "Add at least 1 medication first, then select a concern"}
         </span>
       </div>
     </section>

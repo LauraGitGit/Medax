@@ -1,3 +1,5 @@
+/* REVIEW: Several keyframe-driven decorative layers—profile paint cost on low-end mobile. */
+
 @keyframes cta-rise {
   from {
     opacity: 0;

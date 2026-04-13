@@ -1,4 +1,5 @@
 import "../styles/MedicationManager.css";
+// REVIEW: Section id is "about" while Header "About" scrolls to "about-medax"—this id is unused by nav; rename or align anchors.
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
@@ -95,6 +96,7 @@ function Pill({ itemKey, index }) {
         rotate: { ...springRotate, delay: index * 0.18 },
       }}
       whileHover={{
+        // REVIEW: Infinite hover animation may distract or affect vestibular sensitivity; consider reduced-motion media query.
         rotate: [0, -7, 7, -7, 7, 0],
         transition: {
           duration: 0.55,

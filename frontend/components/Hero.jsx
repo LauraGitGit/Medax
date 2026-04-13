@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import "../styles/Hero.css";
 import rectangleLogo from "../images/rectangle-with-background.png";
 import heroVideo from "../images/6471440-uhd_4096_2160_25fps.mp4";
+// REVIEW: Bundling a 4K hero video inflates the JS/HTML payload—host from CDN or /public with compressed sources and poster.
 
 const PHASES = [
   {
@@ -32,6 +33,7 @@ export default function Hero() {
       const { top, height } = el.getBoundingClientRect();
       const scrolled = -top;
       const total = height - window.innerHeight;
+      // REVIEW: If total is 0 or negative, scrolled/total becomes NaN or ±Infinity—guard before setRatio.
       setRatio(Math.max(0, Math.min(1, scrolled / total)));
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -87,6 +89,7 @@ export default function Hero() {
               <br />
               more clearly
             </h1>
+            {/* REVIEW: Dead commented JSX below—remove or restore; git history preserves the old badge. */}
             {/* <span className="badge badge-olive badge-pos-2">INTERACTIONS</span> */}
           </div>
         </div>

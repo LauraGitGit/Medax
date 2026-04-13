@@ -20,14 +20,17 @@ export default function MedicationTag({
       )}
       {name}
       {!isSelectionMode && (
-        <button
-          onClick={onRemove}
-          type="button"
-          className="pill-remove"
-          aria-label={`Remove ${name}`}
-        >
-          x
-        </button>
+        <>
+          {/* REVIEW: Visible "x" is minimal; aria-label covers SR—consider a clearer visible affordance (icon + text). */}
+          <button
+            onClick={onRemove}
+            type="button"
+            className="pill-remove"
+            aria-label={`Remove ${name}`}
+          >
+            x
+          </button>
+        </>
       )}
     </span>
   );

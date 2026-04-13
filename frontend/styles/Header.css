@@ -1,3 +1,5 @@
+/* REVIEW: Sticky/fixed stacking (z-index) vs hero video and mobile menu should be audited to avoid overlap glitches. */
+
 .app-header {
   background: #faebdc;
   padding: 0.75rem 2rem;

@@ -1,4 +1,5 @@
 const express = require("express");
+// REVIEW: db.auth.js exists but is never required—Mongo/JWT flows from README are not wired into this server.
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -6,6 +7,7 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 
 // CORS for local frontend development (Vite: localhost:5173)
+// REVIEW: Access-Control-Allow-Origin * is unsafe for credentialed APIs; restrict to known origins in production.
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
@@ -21,11 +23,14 @@ app.get("/health", (req, res) => {
   res.status(200).json({ ok: true, message: "Backend is running" });
 });
 
+// REVIEW: No rate limiting or caching—OpenFDA quota abuse or thundering herd possible.
 // Search medications by partial brand name.
 app.get("/api/openfda/search", async (req, res) => {
   const { name } = req.query;
   if (!name || !String(name).trim()) {
-    return res.status(400).json({ message: "Query parameter 'name' is required" });
+    return res
+      .status(400)
+      .json({ message: "Query parameter 'name' is required" });
   }
 
   try {
@@ -50,7 +55,9 @@ app.get("/api/openfda/search", async (req, res) => {
 app.get("/api/openfda/label", async (req, res) => {
   const { name } = req.query;
   if (!name || !String(name).trim()) {
-    return res.status(400).json({ message: "Query parameter 'name' is required" });
+    return res
+      .status(400)
+      .json({ message: "Query parameter 'name' is required" });
   }
 
   try {

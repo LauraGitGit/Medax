@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap");
+/* REVIEW: Same Playfair import is duplicated across multiple CSS files—load once in font.css to avoid extra requests. */
 
 .da-section {
   display: flex;

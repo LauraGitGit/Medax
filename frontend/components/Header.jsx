@@ -29,6 +29,7 @@ export default function Header() {
 
   function handleNavLink(anchor) {
     if (onStepsPage) {
+      // REVIEW: Full page reload via location.href loses SPA benefits; consider navigate("/") + hash + scroll.
       window.location.href = `/#${anchor}`;
     } else {
       document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth" });
@@ -45,6 +46,7 @@ export default function Header() {
 
   return (
     <header className="app-header">
+      {/* REVIEW: Several header controls omit type="button"; inside a form they would default to submit—set explicitly for safety. */}
       <button
         className="header-brand"
         onClick={() =>

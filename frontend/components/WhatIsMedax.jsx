@@ -104,6 +104,7 @@ export default function WhatIsMedax() {
             className={`wim-card ${highlight ? "wim-card--highlight" : ""}`}
           >
             <div className="wim-card-icon">
+              {/* REVIEW: Decorative icons should use aria-hidden="true" if adjacent text already conveys meaning. */}
               <Icon size={18} strokeWidth={1.5} />
             </div>
             <p className="wim-card-title">{title}</p>

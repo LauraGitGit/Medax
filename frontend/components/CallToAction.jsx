@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
+// REVIEW: "Learn More" scrolls to #about-medax only when that section exists on the same page—fine here but brittle if layout changes.
 export default function CallToAction() {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);

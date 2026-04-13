@@ -8,6 +8,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/steps" element={<StepsPage />} />
+      {/* REVIEW: No catch-all / 404 route—unknown paths render blank with no user feedback. */}
     </Routes>
   );
 }

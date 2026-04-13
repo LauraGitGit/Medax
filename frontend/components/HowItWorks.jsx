@@ -186,6 +186,7 @@ export default function HowItWorks() {
           />
         </svg>
 
+        {/* REVIEW: key={i} is stable here but fragile if STEPS reorder—prefer key={step.title}. */}
         {STEPS.map((step, i) => (
           <div key={i} className="hiw-step">
             <div className="hiw-icon-wrap">{step.icon}</div>

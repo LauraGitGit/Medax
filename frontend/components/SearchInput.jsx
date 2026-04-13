@@ -19,6 +19,7 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
       setSuggestions([]);
       return;
     }
+    // REVIEW: No debounce—every keystroke hits OpenFDA (via proxy or direct); add debounce and abort stale requests.
     async function fetchMedications() {
       try {
         const results = await fetchMedicationSuggestions(searchMedication);
@@ -30,6 +31,7 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
 
         setSuggestions(names);
       } catch (e) {
+        // REVIEW: Failures are silent for the user—consider inline error or toast.
         setSuggestions([]);
       }
     }
@@ -156,6 +158,7 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
         className="dropdown-list"
         ref={dropdownRef}
       >
+        {/* REVIEW: key={medication} collides if the API returns duplicate brand names—suffix with index or dedupe. */}
         {suggestions.map((medication, i) => (
           <li
             key={medication}

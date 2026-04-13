@@ -1,3 +1,4 @@
+// REVIEW: Document VITE_API_BASE_URL in .env.example; without it, non-localhost deploys hit OpenFDA directly (rate limits, no unified error handling).
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
 
@@ -11,6 +12,7 @@ const USE_BACKEND_PROXY =
 
 async function fetchJson(url) {
   const response = await fetch(url);
+  // REVIEW: Assumes JSON body on all responses; non-JSON error pages will throw before surfacing status text.
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data?.message || data?.error?.message || "Request failed");

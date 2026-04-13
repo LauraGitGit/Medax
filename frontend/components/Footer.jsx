@@ -17,6 +17,7 @@ export default function Footer({ minimal = false }) {
               hello@medax.app
             </a>
             <p className="ft-copy">© 2026 Medax</p>
+            {/* REVIEW: href="#" is a dead link and hurts accessibility—wire real routes or remove until content exists. */}
             <a href="#" className="ft-link">
               Privacy Policy
             </a>
@@ -25,6 +26,7 @@ export default function Footer({ minimal = false }) {
           <div className="ft-col">
             <span className="ft-col-label">Page</span>
             <nav className="ft-nav">
+              {/* REVIEW: <a href="/"> forces full document reload; use react-router Link for SPA navigation. */}
               <a href="/" className="ft-link">
                 Home
               </a>
