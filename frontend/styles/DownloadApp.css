@@ -89,10 +89,16 @@
 }
 
 .store-icon {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
+  display: block;
   flex-shrink: 0;
   color: #de7b35;
+}
+
+.store-icon-apple {
+  transform: scale(0.88);
+  transform-origin: center;
 }
 
 .da-right {
@@ -298,8 +304,31 @@
     height: 280px;
   }
 
+  .da-btn {
+    margin: 0 auto;
+    width: 80%;
+  }
+  .da-phone-content {
+    gap: 1rem;
+  }
+
   .da-app-logo {
+    margin-bottom: 1.5rem;
     width: 85px;
     height: 85px;
+  }
+
+  .da-app-btn {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .da-app-welcome {
+    font-size: 0.8rem;
+  }
+
+  .da-app-sub {
+    font-size: 0.5rem;
   }
 }
