@@ -27,14 +27,14 @@ https://medax-nu.vercel.app/
   - Drug-Food
   - Pregnancy & Breastfeeding
   - General Warnings
-- **AI-powered analysis** using GPT-4o — turns raw FDA label data into clear, plain-English summaries with severity ratings (mild / moderate / severe) and a clear recommendation on what to do next
+- **AI-powered analysis** using GPT-4o mini — turns raw FDA label data into clear, plain-English summaries with severity ratings (mild / moderate / severe) and a clear recommendation on what to do next
 - React frontend with real-time search and step-by-step interaction flow
 
 ## Tech stack
 
 **Frontend:** React, Vite, OpenFDA API
 
-**Backend:** Node.js, Express, OpenAI GPT-4o
+**Backend:** Node.js, Express, OpenAI GPT-4o mini
 
 **Planned:** MongoDB, JWT authentication
 
@@ -67,4 +67,4 @@ maintained by the U.S. Food & Drug Administration.
 
 ## Disclaimer
 
-Drug interaction data is sourced from the U.S. Food & Drug Administration (OpenFDA) and interpreted by OpenAI GPT-4o. This is a study project — always consult your healthcare provider or pharmacist before making any changes to your medication regimen.
+Drug interaction data is sourced from the U.S. Food & Drug Administration (OpenFDA) and interpreted by OpenAI GPT-4o mini. This is a study project — always consult your healthcare provider or pharmacist before making any changes to your medication regimen.

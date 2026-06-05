@@ -1,5 +1,5 @@
 {
-  "name": "medication-intercation-api",
+  "name": "medication-interaction-api",
   "version": "1.0.0",
   "description": "",
   "main": "backend/app.js",
