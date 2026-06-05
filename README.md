@@ -1,21 +1,18 @@
 # Medax — Don't guess, check.
 
-A full-stack medication interaction checker. Search any drug and instantly
-check interactions with other medications, alcohol, food, and pregnancy risks.
+A full-stack medication interaction checker. Search any drug and instantly get an **AI-powered, plain-English analysis** of interactions with other medications, alcohol, food, and pregnancy risks.
 
 ## 🚧 Work in Progress
 
-I'm currently working on polishing the frontend and building a user authentication system.
-The next version will allow users to:
+The core interaction analysis is live and AI-powered. Upcoming features include:
 
-- 🔐 Create an account and securely save their medications (data stays private and is not shared)
-- 📋 Keep track of medications in a personal dashboard
-- ✏️ Edit and manage medication dosages with tailored information
-- 🔔 Smart safety reminders, including missed-dose guidance and overdose prevention warnings
+- 🔐 User accounts — securely save medications (data stays private and is not shared)
+- 📋 Personal medication dashboard
+- ✏️ Manage and track medication dosages
+- 🔔 Smart safety reminders, missed-dose guidance, and overdose prevention warnings
+- 📱 Mobile app for iOS and Android
 
-📝 **NOTE:** Currently, users can only **add or remove** medications. Direct editing of medication names is intentionally restricted for safety reasons - the app relies on **exact medication names** to fetch accurate information, and free-text edits could lead to incorrect results. Full edit functionality will be introduced once JWT-based authentication is implemented.
-
-More features coming soon!
+📝 **NOTE:** Currently, users can only **add or remove** medications. Direct editing of medication names is intentionally restricted for safety — the app relies on exact medication names to fetch accurate FDA data, and free-text edits could lead to incorrect results.
 
 ## Live demo
 
@@ -24,20 +21,39 @@ https://medax-nu.vercel.app/
 ## What it does
 
 - Search medications using the OpenFDA API
-- Check drug interactions across 5 categories:
+- Select one or more interaction concerns:
   - Drug-Drug
   - Drug-Alcohol
   - Drug-Food
   - Pregnancy & Breastfeeding
   - General Warnings
-- JWT-protected REST API for managing medication data (In Progress...)
-- React frontend with real-time search and interaction analysis
+- **AI-powered analysis** using GPT-4o — turns raw FDA label data into clear, plain-English summaries with severity ratings (mild / moderate / severe) and a clear recommendation on what to do next
+- React frontend with real-time search and step-by-step interaction flow
 
 ## Tech stack
 
 **Frontend:** React, Vite, OpenFDA API
 
-**Backend:** Node.js, Express, MongoDB, JWT
+**Backend:** Node.js, Express, OpenAI GPT-4o
+
+**Planned:** MongoDB, JWT authentication
+
+## How to run locally
+
+One command starts both the frontend and backend together:
+
+```bash
+npm run dev
+```
+
+- Frontend runs on **http://localhost:5173**
+- Backend runs on **http://localhost:3001**
+
+Create a `.env` file in the project root with your OpenAI API key:
+
+```
+OPENAI_API_KEY=your-key-here
+```
 
 ## Data source
 
@@ -51,4 +67,4 @@ maintained by the U.S. Food & Drug Administration.
 
 ## Disclaimer
 
-Drug interaction data is sourced from the U.S. Food & Drug Administration (OpenFDA). This is a study project — always consult your healthcare provider or pharmacist before making any changes to your medication regimen.
+Drug interaction data is sourced from the U.S. Food & Drug Administration (OpenFDA) and interpreted by OpenAI GPT-4o. This is a study project — always consult your healthcare provider or pharmacist before making any changes to your medication regimen.

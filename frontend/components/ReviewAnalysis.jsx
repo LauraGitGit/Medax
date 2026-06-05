@@ -1,118 +1,105 @@
 import "../styles/ReviewAnalysis.css";
-import { Activity, AlertTriangle, ShieldCheck } from "lucide-react";
+import { Activity, AlertTriangle, ShieldCheck, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
-import { fetchMedicationLabel } from "../openFdaApi";
+import { fetchMedicationLabel, analyzeWithAI } from "../openFdaApi";
+
+const TIPS = [
+  "Always take medications exactly as prescribed — never adjust the dose on your own.",
+  "Tell your doctor and pharmacist about every supplement and vitamin you take, not just prescriptions.",
+  "Never stop a prescribed medication suddenly without consulting your healthcare provider first.",
+  "Keep an up-to-date list of all your medications and carry it with you to every appointment.",
+  "Some medications need to be taken with food to avoid stomach irritation — check your label.",
+  "Store medications at the temperature listed on the packaging — heat and moisture can reduce their effectiveness.",
+  "If you miss a dose, do not double up — check the leaflet or ask your pharmacist what to do.",
+  "Alcohol can interact with many common medications, even over-the-counter ones.",
+];
 
 const TYPE_LABELS = {
-  "drug-drug": "Drug-Drug",
-  "drug-alcohol": "Drug-Alcohol",
-  "drug-food": "Drug-Food",
+  "drug-drug": "Drug-Drug Interactions",
+  "drug-alcohol": "Drug-Alcohol Interactions",
+  "drug-food": "Drug-Food Interactions",
   "pregnancy-breastfeeding": "Pregnancy & Breastfeeding",
   warnings: "Warnings",
+};
+
+const SEVERITY_COLOR = {
+  severe: {
+    bg: "#fff0f0",
+    border: "#f5c0c0",
+    badge: "#c0392b",
+    icon: "#c0392b",
+  },
+  moderate: {
+    bg: "#fff7f0",
+    border: "#f5d9c0",
+    badge: "#c8622a",
+    icon: "#c8622a",
+  },
+  mild: {
+    bg: "#f7fbf5",
+    border: "#c8dfc5",
+    badge: "#4a9b5f",
+    icon: "#4a9b5f",
+  },
 };
 
 export default function ReviewAnalysis({
   addedMedications,
   interactionTypes = [],
 }) {
-  const [results, setResults] = useState([]);
+  const [analyses, setAnalyses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState("");
+  const [error, setError] = useState(null);
+  const [tipIndex, setTipIndex] = useState(0);
 
-  const FDA_FIELD_MAP = {
-    "drug-drug": "ask_doctor_or_pharmacist",
-    "drug-alcohol": "warnings",
-    "drug-food": "when_using",
-    "pregnancy-breastfeeding": "pregnancy_or_breast_feeding",
-    warnings: "warnings",
-  };
-
-  function extractRelevantText(text, type) {
-    if (!text) return null;
-    const sentences = text.split(/\.|\n/).filter(Boolean);
-    const keywords = {
-      "drug-alcohol": ["alcohol", "drinking"],
-      warnings: [
-        "warning",
-        "risk",
-        "bleeding",
-        "heart",
-        "stroke",
-        "allergy",
-        "allergic",
-        "dosage",
-      ],
-      "drug-food": ["food", "milk", "eat", "stomach"],
-      "drug-drug": ["drug", "medication", "medicine", "taking"],
-      "pregnancy-breastfeeding": ["pregnant", "pregnancy", "breast", "nursing"],
-    };
-    const relevant = sentences.filter((s) =>
-      (keywords[type] || []).some((kw) => s.toLowerCase().includes(kw)),
-    );
-    return relevant.length > 0
-      ? relevant.slice(0, 2).join(". ").trim() + "."
-      : sentences[0];
-  }
-
-  function getSeverity(text) {
-    if (!text) return "mild";
-    const lower = text.toLowerCase();
-    if (
-      lower.includes("severe") ||
-      lower.includes("serious") ||
-      lower.includes("life-threatening") ||
-      lower.includes("fatal") ||
-      lower.includes("death")
-    )
-      return "severe";
-    if (
-      lower.includes("risk") ||
-      lower.includes("bleeding") ||
-      lower.includes("heart") ||
-      lower.includes("stroke") ||
-      lower.includes("allergy") ||
-      lower.includes("allergic") ||
-      lower.includes("warning")
-    )
-      return "moderate";
-    return "mild";
-  }
+  useEffect(() => {
+    if (!loading) return;
+    setTipIndex(Math.floor(Math.random() * TIPS.length));
+    const interval = setInterval(() => {
+      setTipIndex((i) => (i + 1) % TIPS.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [loading]);
 
   useEffect(() => {
     if (addedMedications.length === 0 || interactionTypes.length === 0) {
-      setResults([]);
+      setAnalyses([]);
+      setError(null);
       return;
     }
-    setLoading(true);
-    async function fetchInteractions() {
-      const allResults = await Promise.all(
-        addedMedications.map((med) => fetchMedicationLabel(med)),
-      );
-      setResults(allResults.filter(Boolean));
-      setLoading(false);
-    }
-    fetchInteractions();
-  }, [addedMedications, interactionTypes]);
 
-  const SEVERITY_COLOR = {
-    severe: {
-      bg: "#fff0f0",
-      border: "#f5c0c0",
-      badge: "#c0392b",
-      icon: "#c0392b",
-    },
-    moderate: {
-      bg: "#fff7f0",
-      border: "#f5d9c0",
-      badge: "#c8622a",
-      icon: "#c8622a",
-    },
-    mild: {
-      bg: "#f7fbf5",
-      border: "#c8dfc5",
-      badge: "#4a9b5f",
-      icon: "#4a9b5f",
-    },
-  };
+    async function runAnalysis() {
+      setLoading(true);
+      setError(null);
+      setAnalyses([]);
+
+      try {
+        // Step 1: Fetch raw FDA label data for every medication
+        setLoadingStep("Fetching FDA data…");
+        const fdaResults = await Promise.all(
+          addedMedications.map((med) => fetchMedicationLabel(med)),
+        );
+
+        // Step 2: Send data to the backend AI endpoint
+        setLoadingStep("AI is analyzing your medications…");
+        const aiAnalyses = await analyzeWithAI(
+          addedMedications,
+          interactionTypes,
+          fdaResults,
+        );
+
+        setAnalyses(aiAnalyses);
+      } catch (err) {
+        setError(err.message || "Something went wrong. Please try again.");
+      } finally {
+        setLoading(false);
+        setLoadingStep("");
+      }
+    }
+
+    runAnalysis();
+  }, [addedMedications, interactionTypes]);
 
   return (
     <section className="ra-section">
@@ -127,6 +114,7 @@ export default function ReviewAnalysis({
         Here's a summary of your selections and results.
       </p>
 
+      {/* No medications added */}
       {addedMedications.length === 0 && (
         <div className="ra-empty-card" aria-live="polite">
           <div className="ra-empty-icon">
@@ -139,6 +127,7 @@ export default function ReviewAnalysis({
         </div>
       )}
 
+      {/* Medications added but no interaction type chosen */}
       {addedMedications.length > 0 && interactionTypes.length === 0 && (
         <div className="ra-empty-card" aria-live="polite">
           <div className="ra-empty-icon">
@@ -151,70 +140,108 @@ export default function ReviewAnalysis({
         </div>
       )}
 
+      {/* Loading state */}
       {loading && (
         <div className="ra-empty-card">
           <div className="ra-empty-icon ra-empty-icon--pulse">
-            <Activity size={26} aria-hidden="true" />
+            <Sparkles size={26} aria-hidden="true" />
           </div>
-          <h3 className="ra-empty-title">Analyzing…</h3>
-          <p className="ra-empty-text">Fetching data from the FDA database.</p>
+          <h3 className="ra-empty-title">{loadingStep}</h3>
+          <p className="ra-empty-text">
+            Our AI is reading FDA data and preparing a plain-English summary for
+            you.
+          </p>
+          <div className="ra-tip">
+            <span className="ra-tip-label">💡 Did you know?</span>
+            <p className="ra-tip-text">{TIPS[tipIndex]}</p>
+          </div>
         </div>
       )}
 
-      {!loading && results.length > 0 && (
-        <div className="ra-results">
-          {interactionTypes.map((type) => (
-            <div key={type} className="ra-type-group">
-              <h2 className="ra-type-label">{TYPE_LABELS[type]}</h2>
-              {results.map((result, index) => {
-                const fieldName = FDA_FIELD_MAP[type];
-                const interactionText = extractRelevantText(
-                  result?.[fieldName]?.[0],
-                  type,
-                );
-                const medName =
-                  result?.openfda?.brand_name?.[0] || addedMedications[index];
-                const severity = getSeverity(interactionText);
-                const colors = SEVERITY_COLOR[severity];
-                const SeverityIcon =
-                  severity === "mild" ? ShieldCheck : AlertTriangle;
-
-                return (
-                  <article
-                    key={index}
-                    className="ra-card"
-                    style={{
-                      background: colors.bg,
-                      borderColor: colors.border,
-                    }}
-                  >
-                    <div
-                      className="ra-card-icon"
-                      style={{ color: colors.icon }}
-                    >
-                      <SeverityIcon size={22} aria-hidden="true" />
-                    </div>
-
-                    <div className="ra-card-body">
-                      <span className="ra-card-name">{medName}</span>
-                      <p className="ra-card-text">
-                        {interactionText ||
-                          `No ${type} interaction data found.`}
-                      </p>
-                    </div>
-
-                    <span
-                      className="ra-badge"
-                      style={{ background: colors.badge }}
-                    >
-                      {severity}
-                    </span>
-                  </article>
-                );
-              })}
-            </div>
-          ))}
+      {/* Error state */}
+      {!loading && error && (
+        <div className="ra-empty-card ra-error-card" aria-live="polite">
+          <div className="ra-empty-icon ra-empty-icon--error">
+            <AlertTriangle size={26} aria-hidden="true" />
+          </div>
+          <h3 className="ra-empty-title">Analysis failed</h3>
+          <p className="ra-empty-text">{error}</p>
+          <p className="ra-empty-text ra-error-hint">
+            Make sure the backend server is running with <code>npm start</code>.
+          </p>
         </div>
+      )}
+
+      {/* AI Results */}
+      {!loading && !error && analyses.length > 0 && (
+        <>
+          <div className="ra-ai-indicator">
+            <Sparkles size={13} aria-hidden="true" />
+            AI-powered analysis
+          </div>
+
+          <div className="ra-results">
+            {interactionTypes.map((type) => {
+              const typeAnalyses = analyses.filter((a) => a.type === type);
+              if (typeAnalyses.length === 0) return null;
+
+              return (
+                <div key={type} className="ra-type-group">
+                  <h2 className="ra-type-label">{TYPE_LABELS[type]}</h2>
+
+                  {typeAnalyses.map((analysis, index) => {
+                    const severity = ["mild", "moderate", "severe"].includes(
+                      analysis.severity,
+                    )
+                      ? analysis.severity
+                      : "mild";
+                    const colors = SEVERITY_COLOR[severity];
+                    const SeverityIcon =
+                      severity === "mild" ? ShieldCheck : AlertTriangle;
+
+                    return (
+                      <article
+                        key={index}
+                        className="ra-card"
+                        style={{
+                          background: colors.bg,
+                          borderColor: colors.border,
+                        }}
+                      >
+                        <div
+                          className="ra-card-icon"
+                          style={{ color: colors.icon }}
+                        >
+                          <SeverityIcon size={22} aria-hidden="true" />
+                        </div>
+
+                        <div className="ra-card-body">
+                          <span className="ra-card-name">
+                            {analysis.medication}
+                          </span>
+                          <p className="ra-card-text">{analysis.summary}</p>
+                          {analysis.recommendation && (
+                            <p className="ra-card-recommendation">
+                              <strong>What to do:</strong>{" "}
+                              {analysis.recommendation}
+                            </p>
+                          )}
+                        </div>
+
+                        <span
+                          className="ra-badge"
+                          style={{ background: colors.badge }}
+                        >
+                          {severity}
+                        </span>
+                      </article>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        </>
       )}
     </section>
   );

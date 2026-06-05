@@ -82,10 +82,11 @@ export default function Hero() {
 
           <div className="hero-heading-wrap">
             <span className="badge badge-orange badge-pos-1">DRUG SAFETY</span>
+            <span className="badge badge-olive badge-pos-3">AI POWERED</span>
             <h1 className="hero-heading">
-              Check medication risks
+              Smart medication
               <br />
-              more clearly
+              risk analysis
             </h1>
             {/* <span className="badge badge-olive badge-pos-2">INTERACTIONS</span> */}
           </div>

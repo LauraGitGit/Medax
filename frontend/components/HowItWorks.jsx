@@ -100,9 +100,9 @@ const STEPS = [
         />
       </svg>
     ),
-    title: "Review & Stay Safe",
+    title: "AI-Powered Review",
     description:
-      "Get a clear, readable report. Understand what to watch for and share results with your doctor or pharmacist.",
+      "Get a plain-English AI summary — no jargon, just clear insights on severity and a recommendation to guide you on what to do next.",
   },
 ];
 

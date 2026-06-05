@@ -29,11 +29,10 @@ export default function DownloadApp() {
           <span />
           <span />
         </div>
-        <h2 className="da-heading">What's Next</h2>
+        <h2 className="da-heading">Coming to Mobile</h2>
         <p className="da-subtext">
-          A future mobile app of Medax could help users access medication safety
-          information more quickly when practical questions come up in daily
-          life.
+          We're bringing Medax to iOS and Android — so you can check medication
+          safety on the go, right when you need it.
         </p>
         <div className="da-buttons">
           <button className="da-btn">

@@ -50,3 +50,48 @@ export async function fetchMedicationLabel(medication) {
   );
   return data.results?.[0] || null;
 }
+
+// Maps each interaction type to the relevant FDA label field
+const FDA_FIELD_MAP = {
+  "drug-drug": "ask_doctor_or_pharmacist",
+  "drug-alcohol": "warnings",
+  "drug-food": "when_using",
+  "pregnancy-breastfeeding": "pregnancy_or_breast_feeding",
+  warnings: "warnings",
+};
+
+// Sends medications + FDA data to the backend, which calls OpenAI for a plain-English analysis.
+export async function analyzeWithAI(medications, interactionTypes, fdaResults) {
+  if (!USE_BACKEND_PROXY) {
+    throw new Error("AI analysis requires the backend server to be running.");
+  }
+
+  // Extract only the relevant FDA text fields to avoid sending huge amounts of data
+  const fdaData = {};
+  medications.forEach((med, index) => {
+    const label = fdaResults[index];
+    if (!label) return;
+    fdaData[med] = {};
+    for (const type of interactionTypes) {
+      const fieldName = FDA_FIELD_MAP[type];
+      const text = label?.[fieldName]?.[0];
+      if (text) {
+        fdaData[med][type] = text.slice(0, 800);
+      }
+    }
+  });
+
+  const response = await fetch(`${API_BASE_URL}/api/analyze`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ medications, interactionTypes, fdaData }),
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.message || "AI analysis failed");
+  }
+
+  const data = await response.json();
+  return data.analyses || [];
+}

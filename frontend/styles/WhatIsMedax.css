@@ -93,6 +93,11 @@
   margin-bottom: 2rem;
 }
 
+.wim-divider--spacious {
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+}
+
 .wim-divider::after {
   content: "";
   flex: 1;

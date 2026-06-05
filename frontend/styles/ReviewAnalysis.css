@@ -51,6 +51,45 @@
   animation: pulse 1.4s ease-in-out infinite;
 }
 
+.ra-tip {
+  margin-top: 1.25rem;
+  background: #fff;
+  border: 1.5px solid #ede8e0;
+  border-radius: 14px;
+  padding: 0.9rem 1.1rem;
+  max-width: 380px;
+  text-align: left;
+  animation: tipFade 0.5s ease;
+}
+
+@keyframes tipFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ra-tip-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #c8622a;
+  margin-bottom: 0.4rem;
+}
+
+.ra-tip-text {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #666;
+  line-height: 1.6;
+}
+
 @keyframes pulse {
   0%,
   100% {
@@ -156,6 +195,62 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #fff;
+}
+
+/* AI-powered indicator pill shown above results */
+.ra-ai-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7c3aed;
+  background: #f3effe;
+  border: 1.5px solid #ddd6fe;
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Recommendation line shown below the summary text */
+.ra-card-recommendation {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.5;
+  padding-top: 0.35rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.ra-card-recommendation strong {
+  color: #333;
+}
+
+/* Error card variant */
+.ra-error-card .ra-empty-icon {
+  background: #fff0f0;
+  color: #c0392b;
+}
+
+.ra-error-card .ra-empty-icon--error {
+  background: #fff0f0;
+  color: #c0392b;
+}
+
+.ra-error-hint {
+  font-size: 0.8rem !important;
+  color: #aaa !important;
+  margin-top: 0.25rem !important;
+}
+
+.ra-error-hint code {
+  background: #f0f0f0;
+  padding: 0.1rem 0.4rem;
+  border-radius: 5px;
+  font-size: 0.78rem;
+  color: #555;
 }
 
 @media (max-width: 1024px) {

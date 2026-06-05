@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node backend/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite",
+    "dev": "concurrently --names \"frontend,backend\" --prefix-colors \"cyan,yellow\" \"vite\" \"node backend/app.js\"",
     "build": "vite build"
   },
   "keywords": [],
@@ -52,6 +52,7 @@
     "clsx": "2.1.1",
     "cmdk": "1.1.1",
     "date-fns": "3.6.0",
+    "dotenv": "^17.4.2",
     "embla-carousel-react": "8.6.0",
     "express": "^5.2.1",
     "framer-motion": "^12.38.0",
@@ -62,6 +63,7 @@
     "mongoose": "^9.1.5",
     "motion": "12.23.24",
     "next-themes": "0.4.6",
+    "openai": "^6.42.0",
     "react": "18.3.1",
     "react-day-picker": "8.10.1",
     "react-dnd": "16.0.1",
@@ -84,6 +86,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "4.7.0",
+    "concurrently": "^10.0.3",
     "tailwindcss": "4.1.12",
     "vite": "6.3.5"
   },

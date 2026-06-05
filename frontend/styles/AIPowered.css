@@ -1,0 +1,318 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap");
+
+.aip-section {
+  padding: 5rem 0 4.5rem;
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+
+.aip-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Label — matches wim-label style ── */
+.aip-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  background: #de7b35;
+  border: 1px solid #e0d8d0;
+  padding: 0.4rem 1.1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2.25rem;
+}
+
+/* ── Header ── */
+.aip-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+
+.aip-heading {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 3.6rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.1;
+  margin: 0;
+  flex: 0 0 420px;
+}
+
+.aip-heading em {
+  font-style: italic;
+  color: #c8622a;
+}
+
+.aip-subheading {
+  flex: 1;
+  font-size: 0.97rem;
+  color: #666;
+  line-height: 1.8;
+  margin: 0;
+  padding-top: 0.5rem;
+  border-left: 2.5px solid #e8a07a;
+  padding-left: 2rem;
+}
+
+.aip-subheading strong {
+  color: #c8622a;
+  font-weight: 700;
+}
+
+/* ── Feature Cards ── */
+.aip-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.aip-feature {
+  background: #fff8f3;
+  border: 1.5px solid #f0e8e0;
+  border-radius: 1.1rem;
+  padding: 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.aip-feature:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(200, 98, 42, 0.08);
+}
+
+.aip-feature-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 0.65rem;
+  background: rgba(200, 98, 42, 0.1);
+  color: #c8622a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.aip-feature-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.aip-feature-desc {
+  font-size: 0.82rem;
+  color: #777;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Demo block ── */
+.aip-demo {
+  background: linear-gradient(135deg, #fff8f3 0%, #fde8d8 100%);
+  border: 1.5px solid #f0ddd0;
+  border-radius: 1.5rem;
+  padding: 2rem 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.aip-demo-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #c8622a;
+}
+
+/* ── Demo Card ── */
+.aip-demo-card {
+  background: #fff7f0;
+  border: 1.5px solid #f5d9c0;
+  border-radius: 1rem;
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.aip-demo-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.aip-demo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.aip-demo-type {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #de7b35;
+}
+
+.aip-demo-med {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.aip-demo-badge {
+  flex-shrink: 0;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+
+.aip-demo-badge--moderate {
+  background: #c8622a;
+}
+
+.aip-demo-summary {
+  font-size: 0.88rem;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.aip-demo-rec {
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.5;
+  padding-top: 0.6rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.aip-demo-rec strong {
+  color: #333;
+}
+
+/* ── CTA button — matches hero-btn-primary style ── */
+.aip-cta-btn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #c8622a;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.aip-cta-btn:hover {
+  background: #b55520;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(200, 98, 42, 0.28);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .aip-heading {
+    font-size: 3rem;
+    flex: 0 0 340px;
+  }
+
+  .aip-header {
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .aip-section {
+    padding: 3.5rem 0 3rem;
+  }
+
+  .aip-header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .aip-heading {
+    font-size: 2.6rem;
+    flex: unset;
+  }
+
+  .aip-subheading {
+    border-left: none;
+    padding-left: 0;
+    border-top: 2.5px solid #e8a07a;
+    padding-top: 1.25rem;
+  }
+
+  .aip-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .aip-demo {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .aip-section {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .aip-heading {
+    font-size: 2rem;
+  }
+
+  .aip-features {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .aip-demo {
+    padding: 1.25rem 1rem;
+    border-radius: 1.1rem;
+  }
+
+  .aip-demo-card {
+    padding: 1rem 1.1rem;
+  }
+
+  .aip-demo-summary {
+    font-size: 0.84rem;
+  }
+
+  .aip-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

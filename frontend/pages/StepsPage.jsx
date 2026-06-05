@@ -114,6 +114,13 @@ export default function StepsPage() {
         )}
       </div>
 
+      <p className="steps-disclaimer">
+        <span className="steps-disclaimer-icon">⚠</span>
+        Data sourced from OpenFDA &amp; interpreted by OpenAI GPT-4o. Always
+        consult your healthcare provider or pharmacist before making any changes
+        to your medication regimen.
+      </p>
+
       <div className="wizard-footer">
         <button className="wizard-nav-btn wizard-back" onClick={handleBack}>
           ‹ Back

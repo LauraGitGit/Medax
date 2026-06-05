@@ -160,7 +160,7 @@ export default function MedicationManager() {
           marginBottom: "3.5rem",
         }}
       >
-        <span className="mm-label">Medication Manager</span>
+        <span className="mm-label">Coming Soon</span>
         <h2
           className="mm-heading"
           style={{
@@ -169,21 +169,34 @@ export default function MedicationManager() {
             fontWeight: 600,
             color: "#1a1a1a",
             lineHeight: 1.15,
-            margin: 0,
+            margin: "0 0 1rem",
             textAlign: "center",
             maxWidth: "640px",
           }}
         >
-          Your medication manager{" "}
+          The future{" "}
           <em
             style={{
               fontStyle: "italic",
               fontFamily: "'Playfair Display', Georgia, serif",
             }}
           >
-            in one place
+            of Medax
           </em>
         </h2>
+        <p
+          style={{
+            fontSize: "0.9rem",
+            color: "#aaa",
+            margin: 0,
+            textAlign: "center",
+            maxWidth: "420px",
+            lineHeight: 1.7,
+          }}
+        >
+          These features are currently in development. We're working on bringing
+          you a complete medication management experience.
+        </p>
       </motion.div>
 
       <div className="mm-pills-clip">

@@ -86,6 +86,12 @@
   transform: rotate(-2.5deg);
 }
 
+.badge-pos-3 {
+  bottom: 0.8rem;
+  left: 40%;
+  transform: rotate(-5deg);
+}
+
 .hero-below-video {
   position: absolute;
   bottom: 0;
@@ -246,6 +252,12 @@
   .badge-pos-2 {
     left: 10%;
     bottom: 1rem;
+    font-size: 0.5rem;
+  }
+
+  .badge-pos-3 {
+    left: 1%;
+    bottom: 0.5rem;
     font-size: 0.5rem;
   }
 
