@@ -129,7 +129,7 @@ export default function WhatIsMedax() {
           </p>
           <p className="wim-body">
             Instead of searching through raw medical information, Medax uses{" "}
-            <strong style={{ color: "#c8622a" }}>GPT-4o</strong> to translate
+            <strong style={{ color: "#c8622a" }}>GPT-4o mini</strong> to translate
             complex FDA data into plain-English explanations — so you always
             know exactly what to watch for and what to do next.
           </p>

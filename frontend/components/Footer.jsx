@@ -65,7 +65,7 @@ export default function Footer({ minimal = false }) {
             <span className="ft-col-label">Disclaimer</span>
             <p className="ft-disclaimer">
               Drug interaction data is sourced from the U.S. Food &amp; Drug
-              Administration (OpenFDA) and interpreted by OpenAI GPT-4o. This is
+              Administration (OpenFDA) and interpreted by OpenAI GPT-4o mini. This is
               a study project — always consult your healthcare provider or
               pharmacist before making any changes to your medication regimen.
             </p>

@@ -69,7 +69,7 @@ export default function AIPowered() {
           <em>easy to understand.</em>
         </h2>
         <p className="aip-subheading">
-          Medax uses <strong>GPT-4o</strong> to turn dense FDA pharmaceutical
+          Medax uses <strong>GPT-4o mini</strong> to turn dense FDA pharmaceutical
           data into clear, plain-English explanations — so you never have to
           decode a drug label again.
         </p>

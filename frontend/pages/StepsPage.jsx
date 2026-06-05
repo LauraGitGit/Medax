@@ -116,7 +116,7 @@ export default function StepsPage() {
 
       <p className="steps-disclaimer">
         <span className="steps-disclaimer-icon">⚠</span>
-        Data sourced from OpenFDA &amp; interpreted by OpenAI GPT-4o. Always
+        Data sourced from OpenFDA &amp; interpreted by OpenAI GPT-4o mini. Always
         consult your healthcare provider or pharmacist before making any changes
         to your medication regimen.
       </p>
