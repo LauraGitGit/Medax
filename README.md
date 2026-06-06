@@ -2,18 +2,6 @@
 
 A full-stack medication interaction checker. Search any drug and instantly get an **AI-powered, plain-English analysis** of interactions with other medications, alcohol, food, and pregnancy risks.
 
-## 🚧 Work in Progress
-
-The core interaction analysis is live and AI-powered. Upcoming features include:
-
-- 🔐 User accounts — securely save medications (data stays private and is not shared)
-- 📋 Personal medication dashboard
-- ✏️ Manage and track medication dosages
-- 🔔 Smart safety reminders, missed-dose guidance, and overdose prevention warnings
-- 📱 Mobile app for iOS and Android
-
-📝 **NOTE:** Currently, users can only **add or remove** medications. Direct editing of medication names is intentionally restricted for safety — the app relies on exact medication names to fetch accurate FDA data, and free-text edits could lead to incorrect results.
-
 ## Live demo
 
 https://medax-nu.vercel.app/
@@ -21,22 +9,23 @@ https://medax-nu.vercel.app/
 ## What it does
 
 - Search medications using the OpenFDA API
-- Select one or more interaction concerns:
+- Select one or more interaction concerns — choose any or all:
   - Drug-Drug
   - Drug-Alcohol
   - Drug-Food
   - Pregnancy & Breastfeeding
   - General Warnings
-- **AI-powered analysis** using GPT-4o mini — turns raw FDA label data into clear, plain-English summaries with severity ratings (mild / moderate / severe) and a clear recommendation on what to do next
-- React frontend with real-time search and step-by-step interaction flow
+- **AI-powered analysis** using GPT-4o mini — turns raw FDA label data into clear, plain-English summaries with severity ratings (mild / moderate / severe) and a recommendation on what to do next
+- Rotating medication safety tips shown while the AI is analyzing
+- React frontend with real-time search and a step-by-step interaction flow
 
 ## Tech stack
 
-**Frontend:** React, Vite, OpenFDA API
+**Frontend:** React, Vite, OpenFDA API, deployed on Vercel
 
-**Backend:** Node.js, Express, OpenAI GPT-4o mini
+**Backend:** Node.js, Express, OpenAI GPT-4o mini, deployed on Render
 
-**Planned:** MongoDB, JWT authentication
+**Planned:** MongoDB, JWT authentication, iOS & Android mobile app
 
 ## How to run locally
 
@@ -55,6 +44,18 @@ Create a `.env` file in the project root with your OpenAI API key:
 OPENAI_API_KEY=your-key-here
 ```
 
+## 🚧 Work in Progress
+
+The core interaction analysis is live and AI-powered. Upcoming features include:
+
+- 🔐 User accounts — securely save medications (data stays private and is not shared)
+- 📋 Personal medication dashboard
+- ✏️ Manage and track medication dosages
+- 🔔 Smart safety reminders, missed-dose guidance, and overdose prevention warnings
+- 📱 Mobile app for iOS and Android
+
+📝 **NOTE:** Currently, users can only **add or remove** medications. Direct editing of medication names is intentionally restricted for safety — the app relies on exact medication names to fetch accurate FDA data, and free-text edits could lead to incorrect results.
+
 ## Data source
 
 Drug interaction data is sourced from the
@@ -67,4 +68,4 @@ maintained by the U.S. Food & Drug Administration.
 
 ## Disclaimer
 
-Drug interaction data is sourced from the U.S. Food & Drug Administration (OpenFDA) and interpreted by OpenAI GPT-4o mini. This is a study project — always consult your healthcare provider or pharmacist before making any changes to your medication regimen.
+⚠ Drug interaction data is sourced from the U.S. Food & Drug Administration (OpenFDA) and interpreted by OpenAI GPT-4o mini. This is a study project — always consult your healthcare provider or pharmacist before making any changes to your medication regimen.

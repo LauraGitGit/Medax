@@ -167,7 +167,8 @@ export default function ReviewAnalysis({
           <h3 className="ra-empty-title">Analysis failed</h3>
           <p className="ra-empty-text">{error}</p>
           <p className="ra-empty-text ra-error-hint">
-            Make sure the backend server is running with <code>npm start</code>.
+            This feature requires a live connection to our analysis server.
+            Please try again shortly or contact support.
           </p>
         </div>
       )}
