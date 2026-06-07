@@ -50,6 +50,7 @@ export default function ReviewAnalysis({
   const [analyses, setAnalyses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState("");
+  const [slowLoading, setSlowLoading] = useState(false);
   const [error, setError] = useState(null);
   const [tipIndex, setTipIndex] = useState(0);
 
@@ -73,6 +74,11 @@ export default function ReviewAnalysis({
       setLoading(true);
       setError(null);
       setAnalyses([]);
+      setSlowLoading(false);
+
+      // If the AI step takes more than 8 seconds, the Render server is likely
+      // waking up from sleep — show a friendly heads-up instead of silence.
+      let slowTimer = null;
 
       try {
         // Step 1: Fetch raw FDA label data for every medication
@@ -83,6 +89,7 @@ export default function ReviewAnalysis({
 
         // Step 2: Send data to the backend AI endpoint
         setLoadingStep("AI is analyzing your medications…");
+        slowTimer = setTimeout(() => setSlowLoading(true), 8000);
         const aiAnalyses = await analyzeWithAI(
           addedMedications,
           interactionTypes,
@@ -93,8 +100,10 @@ export default function ReviewAnalysis({
       } catch (err) {
         setError(err.message || "Something went wrong. Please try again.");
       } finally {
+        clearTimeout(slowTimer);
         setLoading(false);
         setLoadingStep("");
+        setSlowLoading(false);
       }
     }
 
@@ -147,10 +156,17 @@ export default function ReviewAnalysis({
             <Sparkles size={26} aria-hidden="true" />
           </div>
           <h3 className="ra-empty-title">{loadingStep}</h3>
-          <p className="ra-empty-text">
-            Our AI is reading FDA data and preparing a plain-English summary for
-            you.
-          </p>
+          {slowLoading ? (
+            <p className="ra-empty-text">
+              ☕ Our analysis server is waking up after a period of inactivity.
+              This first request can take up to 30 seconds — hang tight!
+            </p>
+          ) : (
+            <p className="ra-empty-text">
+              Our AI is reading FDA data and preparing a plain-English summary
+              for you.
+            </p>
+          )}
           <div className="ra-tip">
             <span className="ra-tip-label">💡 Did you know?</span>
             <p className="ra-tip-text">{TIPS[tipIndex]}</p>
