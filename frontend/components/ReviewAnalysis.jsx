@@ -76,18 +76,14 @@ export default function ReviewAnalysis({
       setAnalyses([]);
       setSlowLoading(false);
 
-      // If the AI step takes more than 8 seconds, the Render server is likely
-      // waking up from sleep — show a friendly heads-up instead of silence.
       let slowTimer = null;
 
       try {
-        // Step 1: Fetch raw FDA label data for every medication
         setLoadingStep("Fetching FDA data…");
         const fdaResults = await Promise.all(
           addedMedications.map((med) => fetchMedicationLabel(med)),
         );
 
-        // Step 2: Send data to the backend AI endpoint
         setLoadingStep("AI is analyzing your medications…");
         slowTimer = setTimeout(() => setSlowLoading(true), 8000);
         const aiAnalyses = await analyzeWithAI(

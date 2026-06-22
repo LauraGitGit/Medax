@@ -6,7 +6,7 @@ const IS_LOCALHOST =
   (window.location.hostname === "localhost" ||
     window.location.hostname === "127.0.0.1");
 
-const USE_BACKEND_PROXY =
+const HAS_AI_BACKEND =
   Boolean(import.meta.env.VITE_API_BASE_URL) || IS_LOCALHOST;
 
 async function fetchJson(url) {
@@ -18,40 +18,20 @@ async function fetchJson(url) {
   return data;
 }
 
-async function fetchWithBackendFallback(primaryUrl, fallbackUrl) {
-  try {
-    return await fetchJson(primaryUrl);
-  } catch (error) {
-    if (primaryUrl === fallbackUrl) {
-      throw error;
-    }
-    return fetchJson(fallbackUrl);
-  }
-}
-
 export async function fetchMedicationSuggestions(searchMedication) {
   const medicationQuery = encodeURIComponent(searchMedication.trim());
-  const proxyUrl = `${API_BASE_URL}/api/openfda/search?name=${medicationQuery}`;
-  const directUrl = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${medicationQuery}*&limit=10`;
-  const data = await fetchWithBackendFallback(
-    USE_BACKEND_PROXY ? proxyUrl : directUrl,
-    directUrl,
-  );
+  const url = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${medicationQuery}*&limit=10`;
+  const data = await fetchJson(url);
   return data.results ?? [];
 }
 
 export async function fetchMedicationLabel(medication) {
   const medicationQuery = encodeURIComponent(medication);
-  const proxyUrl = `${API_BASE_URL}/api/openfda/label?name=${medicationQuery}`;
-  const directUrl = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22${medicationQuery}%22&limit=1`;
-  const data = await fetchWithBackendFallback(
-    USE_BACKEND_PROXY ? proxyUrl : directUrl,
-    directUrl,
-  );
+  const url = `https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22${medicationQuery}%22&limit=1`;
+  const data = await fetchJson(url);
   return data.results?.[0] || null;
 }
 
-// Maps each interaction type to the relevant FDA label field
 const FDA_FIELD_MAP = {
   "drug-drug": "ask_doctor_or_pharmacist",
   "drug-alcohol": "warnings",
@@ -60,13 +40,12 @@ const FDA_FIELD_MAP = {
   warnings: "warnings",
 };
 
-// Sends medications + FDA data to the backend, which calls OpenAI for a plain-English analysis.
 export async function analyzeWithAI(medications, interactionTypes, fdaResults) {
-  if (!USE_BACKEND_PROXY) {
+  if (!HAS_AI_BACKEND) {
     throw new Error("AI analysis requires the backend server to be running.");
   }
 
-  // Extract only the relevant FDA text fields to avoid sending huge amounts of data
+  // Extract only the relevant FDA text fields
   const fdaData = {};
   medications.forEach((med, index) => {
     const label = fdaResults[index];
