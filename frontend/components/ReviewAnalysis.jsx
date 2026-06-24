@@ -154,11 +154,15 @@ export default function ReviewAnalysis({
           <h3 className="ra-empty-title">{loadingStep}</h3>
           {slowLoading ? (
             <p className="ra-empty-text">
-              This is taking longer than expected — hang tight!
+              <p className="ra-empty-text">
+                Your analysis is on its way. If the service hasn't been used
+                recently, it may take up to 30 seconds to start. Thanks for your
+                patience.
+              </p>
             </p>
           ) : (
             <p className="ra-empty-text">
-              Our AI is reading FDA data and preparing a plain-English summary
+              Our AI is reading FDA data and preparing a plain language summary
               for you.
             </p>
           )}
