@@ -1,6 +1,6 @@
 # Medax — Don't guess, check.
 
-A full-stack medication interaction checker. Search any drug and instantly get an **AI-powered, plain-English analysis** of interactions with other medications, alcohol, food, and pregnancy risks.
+AI-powered full-stack medication interaction checker. Search any drug and instantly get an **AI-powered, plain language analysis** of interactions with other medications, alcohol, food, and pregnancy risks.
 
 ## Live demo
 
@@ -8,16 +8,12 @@ https://medax-nu.vercel.app/
 
 ## What it does
 
-- Search medications using the OpenFDA API
-- Select one or more interaction concerns — choose any or all:
-  - Drug-Drug
-  - Drug-Alcohol
-  - Drug-Food
-  - Pregnancy & Breastfeeding
-  - General Warnings
-- **AI-powered analysis** using GPT-4o mini — turns raw FDA label data into clear, plain-English summaries with severity ratings (mild / moderate / severe) and a recommendation on what to do next
+🔍 Search medications from OpenFDA.
+💊 Check interactions with drugs, alcohol, food, and pregnancy, etc.
+
+- **AI-powered analysis** summarizes medical information into plain language with a recommended guidance.
 - Rotating medication safety tips shown while the AI is analyzing
-- React frontend with real-time search and a step-by-step interaction flow
+- **Swedish and English** — the site defaults to Swedish, with an **SV / EN** language switch in the top-right corner (next to the header)
 
 ## Tech stack
 
@@ -26,6 +22,22 @@ https://medax-nu.vercel.app/
 **Backend:** Node.js, Express, OpenAI GPT-4o mini, deployed on Render
 
 **Planned:** MongoDB, JWT authentication, iOS & Android mobile app
+
+## How it works
+
+- The frontend pulls the relevant FDA label fields for each drug.
+- It sends **medications + concern types + trimmed FDA text + locale (`sv` / `en`)** to the Express backend.
+- The backend builds a prompt and calls **GPT-4o mini**; summaries and recommendations come back in the user's chosen language.
+- Severity (`mild` / `moderate` / `severe`) is returned as structured JSON and rendered in the UI.
+
+## 🚧 What's next?(WIP)
+
+- ✏️ Possible FASS API interagation if agreement succeed for better user experiences.
+- 🔐 User accounts(Optional) — securely save medications (data stays private and is not shared).
+- 📋 Personal medication dashboard, manage and track medication dosages.
+- 📱 Mobile app for iOS and Android
+
+📝 **NOTE:** Currently, users can only **add or remove** medications. Direct editing of medication names is intentionally restricted for safety — the app relies on exact medication names to fetch accurate FDA data, and free-text edits could lead to incorrect results.
 
 ## How to run locally
 
@@ -44,18 +56,6 @@ Create a `.env` file in the project root with your OpenAI API key:
 OPENAI_API_KEY=your-key-here
 ```
 
-## 🚧 Work in Progress
-
-The core interaction analysis is live and AI-powered. Upcoming features include:
-
-- 🔐 User accounts — securely save medications (data stays private and is not shared)
-- 📋 Personal medication dashboard
-- ✏️ Manage and track medication dosages
-- 🔔 Smart safety reminders, missed-dose guidance, and overdose prevention warnings
-- 📱 Mobile app for iOS and Android
-
-📝 **NOTE:** Currently, users can only **add or remove** medications. Direct editing of medication names is intentionally restricted for safety — the app relies on exact medication names to fetch accurate FDA data, and free-text edits could lead to incorrect results.
-
 ## Data source
 
 Drug interaction data is sourced from the
@@ -63,7 +63,7 @@ Drug interaction data is sourced from the
 maintained by the U.S. Food & Drug Administration.
 
 > **Note:** FASS (Swedish drug database) was the preferred data source
-> but requires a paid agreement. OpenFDA was chosen
+> but requires an agreement. OpenFDA was chosen
 > as a free alternative with equivalent interaction data.
 
 ## Disclaimer
