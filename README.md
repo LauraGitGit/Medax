@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="frontend/images/medax-logo.png" alt="MEDAX logo — Don't guess, check." width="280" />
+</p>
+
 # Medax — Don't guess, check.
 
 AI-powered full-stack medication interaction checker. Search any drug and instantly get an **AI-powered, plain language analysis** of interactions with other medications, alcohol, food, and pregnancy risks.
@@ -8,11 +12,9 @@ https://medax-nu.vercel.app/
 
 ## What it does
 
-🔍 Search medications from OpenFDA.
-💊 Check interactions with drugs, alcohol, food, and pregnancy, etc.
-
+- 🔍 Search medications from OpenFDA
+- 💊 Check interactions with drugs, alcohol, food, and pregnancy, etc.
 - **AI-powered analysis** summarizes medical information into plain language with a recommended guidance.
-- Rotating medication safety tips shown while the AI is analyzing
 - **Swedish and English** — the site defaults to Swedish, with an **SV / EN** language switch in the top-right corner (next to the header)
 
 ## Tech stack
