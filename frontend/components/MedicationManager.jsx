@@ -10,12 +10,13 @@ const PILL_LAYOUT = {
   interactionCheck: { left: "58%", top: 20, tilt: -65 },
   refillReminder: { left: "71%", top: 12, tilt: 60 },
   skipDoseAlert: { left: "17%", top: 88, tilt: -14 },
-  dailyReminder: { left: "26%", top: 80, tilt: 30 },
+  dailyReminder: { left: "29%", top: 80, tilt: 30 },
   scanner: { left: "41%", top: 92, tilt: -12 },
   overdoseWarning: { left: "57%", top: 84, tilt: 90 },
   missedDoseWarning: { left: "70%", top: 78, tilt: -60 },
 };
 
+// Swedish version of the pill layout.
 const SV_PILL_NUDGE = {
   skipDoseAlert: { left: "12%" },
   dailyReminder: { left: "28%" },
