@@ -1,114 +1,122 @@
 import { useEffect, useRef } from "react";
 import "../styles/HowItWorks.css";
 import pillIcon from "../images/pill-logo.png";
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 
-const STEPS = [
-  {
-    icon: <img src={pillIcon} alt="Pill icon" className="hiw-pill-icon" />,
-    title: "Add Your Medications",
-    description:
-      "Search and add every medication you're currently taking — prescriptions, supplements, and over-the-counter drugs.",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="22" cy="22" r="16" fill="currentColor" />
-        <line
-          x1="6"
-          y1="22"
-          x2="38"
-          y2="22"
-          stroke="white"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-
-        <circle cx="78" cy="78" r="16" fill="currentColor" />
-        <line
-          x1="62"
-          y1="78"
-          x2="94"
-          y2="78"
-          stroke="white"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-
-        <path
-          d="M 38 22 L 65 22 L 65 56"
-          stroke="currentColor"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        <path
-          d="M 57 48 L 65 57 L 73 48"
-          stroke="currentColor"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-
-        <path
-          d="M 62 78 L 35 78 L 35 44"
-          stroke="currentColor"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        <path
-          d="M 27 52 L 35 43 L 43 52"
-          stroke="currentColor"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-      </svg>
-    ),
-    title: "Check Interactions",
-    description:
-      "Check every combination in seconds — flagging risks, alcohol, food, pregnancy, breastfeeding interactions, and more.",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect
-          x="4"
-          y="3"
-          width="16"
-          height="18"
-          rx="2"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <path
-          d="M8 8h8M8 12h8M8 16h5"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M16 15l2 2 3-3"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    title: "AI-Powered Review",
-    description:
-      "Get a plain-English AI summary — no jargon, just clear insights on severity and a recommendation to guide you on what to do next.",
-  },
-];
+const STEP_KEYS = ["add", "check", "review"];
 
 export default function HowItWorks() {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const pathRef = useRef(null);
+
+  const steps = [
+    {
+      icon: (
+        <img
+          src={pillIcon}
+          alt={t("howItWorks.pillIcon")}
+          className="hiw-pill-icon"
+        />
+      ),
+      title: t("howItWorks.steps.add.title"),
+      description: t("howItWorks.steps.add.desc"),
+    },
+    {
+      icon: (
+        <svg
+          viewBox="0 0 100 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="22" cy="22" r="16" fill="currentColor" />
+          <line
+            x1="6"
+            y1="22"
+            x2="38"
+            y2="22"
+            stroke="white"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          <circle cx="78" cy="78" r="16" fill="currentColor" />
+          <line
+            x1="62"
+            y1="78"
+            x2="94"
+            y2="78"
+            stroke="white"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 38 22 L 65 22 L 65 56"
+            stroke="currentColor"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <path
+            d="M 57 48 L 65 57 L 73 48"
+            stroke="currentColor"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <path
+            d="M 62 78 L 35 78 L 35 44"
+            stroke="currentColor"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <path
+            d="M 27 52 L 35 43 L 43 52"
+            stroke="currentColor"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </svg>
+      ),
+      title: t("howItWorks.steps.check.title"),
+      description: t("howItWorks.steps.check.desc"),
+    },
+    {
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect
+            x="4"
+            y="3"
+            width="16"
+            height="18"
+            rx="2"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <path
+            d="M8 8h8M8 12h8M8 16h5"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M16 15l2 2 3-3"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ),
+      title: t("howItWorks.steps.review.title"),
+      description: t("howItWorks.steps.review.desc"),
+    },
+  ];
 
   useEffect(() => {
     const path = pathRef.current;
@@ -162,9 +170,11 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="hiw-section" ref={sectionRef}>
       <div className="hiw-header">
-        <span className="hiw-label">How it works</span>
+        <span className="hiw-label">{t("howItWorks.label")}</span>
         <h2 className="hiw-heading">
-          Simple steps to <em>safer</em> medication checks
+          {t("howItWorks.headingBefore")}
+          <em>{t("howItWorks.headingEm")}</em>
+          {t("howItWorks.headingAfter")}
         </h2>
       </div>
 
@@ -186,8 +196,8 @@ export default function HowItWorks() {
           />
         </svg>
 
-        {STEPS.map((step, i) => (
-          <div key={i} className="hiw-step">
+        {steps.map((step, i) => (
+          <div key={STEP_KEYS[i]} className="hiw-step">
             <div className="hiw-icon-wrap">{step.icon}</div>
             <h3 className="hiw-step-title">{step.title}</h3>
             <p className="hiw-step-desc">{step.description}</p>

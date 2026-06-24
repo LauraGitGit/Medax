@@ -7,7 +7,7 @@ const FEATURES = [
   {
     icon: FileText,
     title: "Plain-English Summaries",
-    desc: "No medical jargon. The AI reads the FDA data and rewrites it in language anyone can understand.",
+    desc: "No medical jargon. AI reads the FDA data and rewrites it in language anyone can understand.",
   },
   {
     icon: ShieldCheck,
@@ -69,9 +69,9 @@ export default function AIPowered() {
           <em>easy to understand.</em>
         </h2>
         <p className="aip-subheading">
-          Medax uses <strong>GPT-4o mini</strong> to turn dense FDA pharmaceutical
-          data into clear, plain-English explanations — so you never have to
-          decode a drug label again.
+          Medax uses <strong>GPT-4o mini</strong> to turn dense FDA
+          pharmaceutical data into clear, plain-English explanations — so you
+          never have to decode a drug label again.
         </p>
       </div>
 

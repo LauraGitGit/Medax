@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import Header from "../components/Header.jsx";
+import TopBar from "../components/TopBar.jsx";
 import SearchInput from "../components/SearchInput.jsx";
 import InteractionType from "../components/InteractionType.jsx";
 import ReviewAnalysis from "../components/ReviewAnalysis.jsx";
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 import "../styles/App.css";
 
 const STORAGE_KEY = "medax_added_medications";
 const TOTAL_STEPS = 3;
 
 export default function StepsPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -63,20 +65,20 @@ export default function StepsPage() {
   }
 
   const STEP_LABELS = [
-    "Add Medications",
-    "Interaction Type",
-    "Review Analysis",
+    t("steps.stepLabels.add"),
+    t("steps.stepLabels.interaction"),
+    t("steps.stepLabels.review"),
   ];
 
   return (
     <div className="app-container steps-wizard">
-      <Header />
+      <TopBar />
 
       <button className="steps-home-btn" onClick={() => navigate("/")}>
-        ← Home
+        {t("steps.home")}
       </button>
 
-      <nav className="step-nav" aria-label="Steps">
+      <nav className="step-nav" aria-label={t("steps.stepsNav")}>
         {STEP_LABELS.map((label, i) => (
           <button
             key={i}
@@ -116,17 +118,15 @@ export default function StepsPage() {
 
       <p className="steps-disclaimer">
         <span className="steps-disclaimer-icon">⚠</span>
-        Data sourced from OpenFDA &amp; interpreted by OpenAI GPT-4o mini. Always
-        consult your healthcare provider or pharmacist before making any changes
-        to your medication regimen.
+        {t("steps.disclaimer")}
       </p>
 
       <div className="wizard-footer">
         <button className="wizard-nav-btn wizard-back" onClick={handleBack}>
-          ‹ Back
+          {t("steps.back")}
         </button>
 
-        <div className="wizard-dots" aria-label="Step progress">
+        <div className="wizard-dots" aria-label={t("steps.stepProgress")}>
           {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
             <span
               key={i}
@@ -140,14 +140,16 @@ export default function StepsPage() {
           onClick={handleNext}
           disabled={!canGoNext[currentStep]}
         >
-          {currentStep === TOTAL_STEPS - 1 ? "Finish" : "Next ›"}
+          {currentStep === TOTAL_STEPS - 1
+            ? t("steps.finish")
+            : t("steps.next")}
         </button>
       </div>
 
       <button
         className={`back-to-top ${showBackToTop ? "back-to-top--visible" : ""}`}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        aria-label="Back to top"
+        aria-label={t("common.backToTop")}
       >
         ↑
       </button>

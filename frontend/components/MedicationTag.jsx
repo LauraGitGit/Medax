@@ -1,4 +1,5 @@
 import "../styles/MedicationTag.css";
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 
 export default function MedicationTag({
   name,
@@ -7,6 +8,8 @@ export default function MedicationTag({
   isSelected = false,
   onSelectToggle,
 }) {
+  const { t } = useTranslation();
+
   return (
     <span className={`pill ${isSelected ? "selected" : ""}`}>
       {isSelectionMode && (
@@ -15,7 +18,7 @@ export default function MedicationTag({
           className="pill-checkbox"
           checked={isSelected}
           onChange={onSelectToggle}
-          aria-label={`Select ${name}`}
+          aria-label={t("searchInput.selectMed", { name })}
         />
       )}
       {name}
@@ -24,7 +27,7 @@ export default function MedicationTag({
           onClick={onRemove}
           type="button"
           className="pill-remove"
-          aria-label={`Remove ${name}`}
+          aria-label={t("searchInput.removeMed", { name })}
         >
           x
         </button>

@@ -3,27 +3,23 @@ import { useNavigate } from "react-router";
 import "../styles/Hero.css";
 import rectangleLogo from "../images/rectangle-with-background.png";
 import heroVideo from "../images/6471440-uhd_4096_2160_25fps.mp4";
-
-const PHASES = [
-  {
-    tag: "DRUG SAFETY",
-    heading: "Got a prescription,\n but still unsure?",
-  },
-  {
-    tag: "INTERACTIONS",
-    heading: "Check interactions, \nand safety risks more clearly",
-  },
-  { tag: "STAY SAFE", heading: "Don't guess. Check.\n - Medax." },
-];
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 
 function ease(t) {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 }
 
 export default function Hero() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const sceneRef = useRef(null);
   const [ratio, setRatio] = useState(0);
+
+  const phases = [
+    { tag: t("hero.phase1Tag"), heading: t("hero.phase1Heading") },
+    { tag: t("hero.phase2Tag"), heading: t("hero.phase2Heading") },
+    { tag: t("hero.phase3Tag"), heading: t("hero.phase3Heading") },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -72,37 +68,46 @@ export default function Hero() {
     };
   }
 
+  const headingLines = t("hero.heading").split("\n");
+
   return (
     <div className="hero-scene" ref={sceneRef}>
       <div className="hero-sticky">
         <div className="hero-static" style={{ opacity: staticOpacity }}>
           <div className="hero-logo-wrap">
-            <img src={rectangleLogo} alt="Medax Logo" className="hero-logo" />
+            <img
+              src={rectangleLogo}
+              alt={t("common.medaxLogo")}
+              className="hero-logo"
+            />
           </div>
 
           <div className="hero-heading-wrap">
-            <span className="badge badge-orange badge-pos-1">DRUG SAFETY</span>
-            <span className="badge badge-olive badge-pos-3">AI POWERED</span>
+            <span className="badge badge-orange badge-pos-1">
+              {t("hero.badgeDrugSafety")}
+            </span>
+            <span className="badge badge-olive badge-pos-3">
+              {t("hero.badgeAiPowered")}
+            </span>
             <h1 className="hero-heading">
-              Smart medication
-              <br />
-              risk analysis
+              {headingLines.map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i < headingLines.length - 1 && <br />}
+                </span>
+              ))}
             </h1>
-            {/* <span className="badge badge-olive badge-pos-2">INTERACTIONS</span> */}
           </div>
         </div>
 
         <div className="hero-below-video" style={{ opacity: staticOpacity }}>
-          <p className="hero-subtext">
-            Understand interactions and safety risks without digging through
-            confusing medical information.
-          </p>
+          <p className="hero-subtext">{t("hero.subtext")}</p>
           <div className="hero-buttons">
             <button
               className="hero-btn-primary"
               onClick={() => navigate("/steps")}
             >
-              START CHECKING
+              {t("hero.startChecking")}
             </button>
           </div>
         </div>
@@ -131,12 +136,20 @@ export default function Hero() {
             style={{ opacity: expandRatio * 0.5 }}
           />
 
-          {PHASES.map((phase, i) => {
+          {phases.map((phase, i) => {
             const s = getTextStyle(i);
+            const headingLines = phase.heading.split("\n");
             return (
               <div key={i} className="hero-phase-text" style={s}>
                 <span className="hero-phase-tag">{phase.tag}</span>
-                <p className="hero-phase-heading">{phase.heading}</p>
+                <p className="hero-phase-heading">
+                  {headingLines.map((line, j) => (
+                    <span key={j}>
+                      {line}
+                      {j < headingLines.length - 1 && <br />}
+                    </span>
+                  ))}
+                </p>
               </div>
             );
           })}

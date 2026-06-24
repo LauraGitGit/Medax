@@ -1,0 +1,68 @@
+.top-bar {
+  position: fixed;
+  top: 2rem;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.top-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: calc(1200px + 5.75rem * 2 + 1rem);
+  pointer-events: auto;
+}
+
+/* Mirrors the language switcher so the header pill stays centered on the page */
+.top-bar-spacer {
+  flex: 0 0 5.75rem;
+  width: 5.75rem;
+}
+
+.top-bar .app-header {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.lang-switcher--top {
+  flex: 0 0 5.75rem;
+  width: 5.75rem;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    top: 1rem;
+    padding: 0 1rem;
+  }
+
+  .top-bar-inner {
+    gap: 0;
+    max-width: none;
+  }
+
+  .top-bar-spacer {
+    display: none;
+  }
+
+  .top-bar .app-header {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar {
+    top: 0.75rem;
+    padding: 0 0.75rem;
+  }
+}

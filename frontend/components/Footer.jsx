@@ -1,7 +1,9 @@
 import "../styles/Footer.css";
 import { useNavigate } from "react-router";
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 
 export default function Footer({ minimal = false }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -12,39 +14,39 @@ export default function Footer({ minimal = false }) {
       {!minimal && (
         <div className="ft-grid">
           <div className="ft-col">
-            <span className="ft-col-label">Email Us</span>
+            <span className="ft-col-label">{t("footer.emailUs")}</span>
             <a href="mailto:hello@medax.app" className="ft-email">
               hello@medax.app
             </a>
             <p className="ft-copy">© 2026 Medax</p>
             <a href="#" className="ft-link">
-              Privacy Policy
+              {t("footer.privacyPolicy")}
             </a>
           </div>
 
           <div className="ft-col">
-            <span className="ft-col-label">Page</span>
+            <span className="ft-col-label">{t("footer.page")}</span>
             <nav className="ft-nav">
               <a href="/" className="ft-link">
-                Home
+                {t("footer.home")}
               </a>
               <button
                 className="ft-link ft-link--btn"
                 onClick={() => navigate("/steps")}
               >
-                Check Interactions
+                {t("footer.checkInteractions")}
               </button>
               <a href="#how-it-works" className="ft-link">
-                How It Works
+                {t("footer.howItWorks")}
               </a>
               <a href="#download" className="ft-link">
-                Download
+                {t("footer.download")}
               </a>
             </nav>
           </div>
 
           <div className="ft-col">
-            <span className="ft-col-label">Social</span>
+            <span className="ft-col-label">{t("footer.social")}</span>
             <nav className="ft-nav">
               <a href="#" className="ft-link">
                 Instagram
@@ -62,13 +64,8 @@ export default function Footer({ minimal = false }) {
           </div>
 
           <div className="ft-col">
-            <span className="ft-col-label">Disclaimer</span>
-            <p className="ft-disclaimer">
-              Drug interaction data is sourced from the U.S. Food &amp; Drug
-              Administration (OpenFDA) and interpreted by OpenAI GPT-4o mini. This is
-              a study project — always consult your healthcare provider or
-              pharmacist before making any changes to your medication regimen.
-            </p>
+            <span className="ft-col-label">{t("footer.disclaimer")}</span>
+            <p className="ft-disclaimer">{t("footer.disclaimerText")}</p>
           </div>
         </div>
       )}
@@ -76,7 +73,7 @@ export default function Footer({ minimal = false }) {
       {!minimal && <div className="ft-divider" />}
 
       <div className="ft-brand" aria-hidden="true">
-        Medax
+        {t("common.brand")}
       </div>
     </footer>
   );

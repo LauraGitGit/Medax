@@ -4,8 +4,10 @@ import { Pill, Search } from "lucide-react";
 import icons8Plus from "../images/icons8-plus.svg";
 import MedicationTag from "./MedicationTag";
 import { fetchMedicationSuggestions } from "../openFdaApi";
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 
 export default function SearchInput({ addedMedications, setAddedMedications }) {
+  const { t } = useTranslation();
   const searchSectionRef = useRef(null);
   const dropdownRef = useRef(null);
   const [searchMedication, setSearchMedication] = useState("");
@@ -196,16 +198,16 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
 
   return (
     <section className="step-section" ref={searchSectionRef}>
-      <span className="step-badge">✦ Step 1 of 3</span>
+      <span className="step-badge">{t("searchInput.badge")}</span>
 
       <h1 className="step-title">
-        Add your
+        {t("searchInput.title")}
         <br />
-        <span className="step-title-highlight">medications</span>
+        <span className="step-title-highlight">
+          {t("searchInput.titleHighlight")}
+        </span>
       </h1>
-      <p className="step-subtitle">
-        Search and add all the medications you'd like to check for interactions.
-      </p>
+      <p className="step-subtitle">{t("searchInput.subtitle")}</p>
 
       <div className="search-wrapper">
         <Search className="search-icon" size={18} aria-hidden="true" />
@@ -215,8 +217,8 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
           value={searchMedication}
           type="search"
           className="search-input"
-          placeholder="Type a medication name..."
-          aria-label="Search medication"
+          placeholder={t("searchInput.placeholder")}
+          aria-label={t("searchInput.searchAria")}
           aria-autocomplete="list"
           aria-controls="medication-listbox"
           aria-activedescendant={
@@ -224,14 +226,14 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
           }
           autoComplete="off"
         />
-        <span className="search-enter-hint">Enter ↵</span>
+        <span className="search-enter-hint">{t("searchInput.enterHint")}</span>
         {renderSuggestions()}
       </div>
 
       {addedMedications.length > 0 && (
         <section
           className="added-medications-panel"
-          aria-label="Added medications"
+          aria-label={t("searchInput.addedAria")}
         >
           <div className="added-medications-toolbar">
             <button
@@ -239,7 +241,9 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
               className="selection-button"
               onClick={handleToggleSelectionMode}
             >
-              {isSelectionMode ? "Back" : "Edit list"}
+              {isSelectionMode
+                ? t("searchInput.back")
+                : t("searchInput.editList")}
             </button>
 
             {isSelectionMode && (
@@ -250,8 +254,8 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
                   onClick={handleSelectAll}
                 >
                   {selectedMedications.length === addedMedications.length
-                    ? "Unselect all"
-                    : "Select all"}
+                    ? t("searchInput.unselectAll")
+                    : t("searchInput.selectAll")}
                 </button>
                 <button
                   type="button"
@@ -259,7 +263,9 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
                   onClick={handleDeleteSelected}
                   disabled={selectedMedications.length === 0}
                 >
-                  Delete selected ({selectedMedications.length})
+                  {t("searchInput.deleteSelected", {
+                    count: selectedMedications.length,
+                  })}
                 </button>
               </div>
             )}
@@ -275,7 +281,9 @@ export default function SearchInput({ addedMedications, setAddedMedications }) {
             <Pill size={28} aria-hidden="true" />
           </div>
           <p>
-            Type a medication name and press <kbd>Enter</kbd> to add it
+            {t("searchInput.emptyStatePrefix")}
+            <kbd>Enter</kbd>
+            {t("searchInput.emptyStateSuffix")}
           </p>
         </div>
       )}

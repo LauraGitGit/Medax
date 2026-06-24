@@ -82,7 +82,7 @@ app.get("/api/openfda/label", async (req, res) => {
 
 // AI-powered medication interaction analysis using OpenAI.
 app.post("/api/analyze", async (req, res) => {
-  const { medications, interactionTypes, fdaData } = req.body;
+  const { medications, interactionTypes, fdaData, locale = "sv" } = req.body;
 
   if (!medications?.length || !interactionTypes?.length) {
     return res
@@ -118,6 +118,11 @@ app.post("/api/analyze", async (req, res) => {
     .map((t) => `"${t}" → ${typeDescriptions[t]}`)
     .join("\n- ");
 
+  const languageRule =
+    locale === "sv"
+      ? 'Write every "summary" and "recommendation" in Swedish — simple, clear language anyone can understand.'
+      : 'Write every "summary" and "recommendation" in plain English — simple language anyone can understand.';
+
   const prompt = `You are a friendly, knowledgeable clinical pharmacist helping patients understand their medications in plain language.
 
 Here is the FDA label data for the patient's medication(s):
@@ -134,7 +139,7 @@ Return a JSON object with this exact structure:
     {
       "medication": "exact medication name as given",
       "type": "one of the exact type keys listed above — e.g. drug-alcohol, drug-food, warnings",
-      "summary": "2-3 plain-English sentences a patient can easily understand. No medical jargon.",
+      "summary": "2-3 sentences a patient can easily understand. No medical jargon.",
       "severity": "mild",
       "recommendation": "One clear, actionable sentence telling the patient what to do."
     }
@@ -142,6 +147,7 @@ Return a JSON object with this exact structure:
 }
 
 Rules:
+- ${languageRule}
 - You MUST return exactly ${totalEntries} entries — one for every medication × type combination
 - The "type" field MUST be one of these exact strings: ${interactionTypes.map((t) => `"${t}"`).join(", ")} — no variations, no capitals, no underscores
 - "severity" must be exactly "mild", "moderate", or "severe" — nothing else

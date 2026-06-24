@@ -1,5 +1,6 @@
 import "../styles/DownloadApp.css";
 import appLogo from "../images/round-with-medax-background.png";
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 
 function AppleIcon() {
   return (
@@ -22,6 +23,8 @@ function AndroidIcon() {
 }
 
 export default function DownloadApp() {
+  const { t } = useTranslation();
+
   return (
     <section id="download" className="da-section">
       <div className="da-left">
@@ -29,11 +32,8 @@ export default function DownloadApp() {
           <span />
           <span />
         </div>
-        <h2 className="da-heading">Coming to Mobile</h2>
-        <p className="da-subtext">
-          We're bringing Medax to iOS and Android — so you can check medication
-          safety on the go, right when you need it.
-        </p>
+        <h2 className="da-heading">{t("downloadApp.heading")}</h2>
+        <p className="da-subtext">{t("downloadApp.subtext")}</p>
         <div className="da-buttons">
           <button className="da-btn">
             <AppleIcon />
@@ -50,12 +50,16 @@ export default function DownloadApp() {
           <div className="da-phone-screen">
             <div className="da-phone-notch" />
             <div className="da-phone-content">
-              <img src={appLogo} alt="Medax App" className="da-app-logo" />
-              <p className="da-app-welcome">Welcome to Medax</p>
-              <p className="da-app-sub">
-                Intelligent medication interaction analysis at your fingertips.
-              </p>
-              <button className="da-app-btn">Get Started</button>
+              <img
+                src={appLogo}
+                alt={t("downloadApp.appLogo")}
+                className="da-app-logo"
+              />
+              <p className="da-app-welcome">{t("downloadApp.welcome")}</p>
+              <p className="da-app-sub">{t("downloadApp.appSub")}</p>
+              <button className="da-app-btn">
+                {t("downloadApp.getStarted")}
+              </button>
             </div>
           </div>
         </div>

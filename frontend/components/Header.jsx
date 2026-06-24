@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import "../styles/Header.css";
 import pillLogo from "../images/pill-logo.png";
 import { useNavigate, useLocation } from "react-router";
+import LanguageSwitcher from "./LanguageSwitcher.jsx";
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 
 export default function Header() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const onStepsPage = location.pathname === "/steps";
@@ -37,10 +40,10 @@ export default function Header() {
   }
 
   const NAV_LINKS = [
-    { label: "About", anchor: "about-medax" },
-    { label: "How It Works", anchor: "how-it-works" },
-    { label: "Download", anchor: "download" },
-    { label: "Contact", anchor: "contact" },
+    { labelKey: "header.about", anchor: "about-medax" },
+    { labelKey: "header.howItWorks", anchor: "how-it-works" },
+    { labelKey: "header.download", anchor: "download" },
+    { labelKey: "header.contact", anchor: "contact" },
   ];
 
   return (
@@ -53,18 +56,25 @@ export default function Header() {
             : window.scrollTo({ top: 0, behavior: "smooth" })
         }
       >
-        <img src={pillLogo} alt="Medax Logo" className="header-pill-logo" />
-        <span className="header-brand-name">Medax</span>
+        <img
+          src={pillLogo}
+          alt={t("common.medaxLogo")}
+          className="header-pill-logo"
+        />
+        <span className="header-brand-name">{t("common.brand")}</span>
       </button>
 
-      <nav className="header-nav header-nav--desktop" aria-label="Main">
-        {NAV_LINKS.map(({ label, anchor }) => (
+      <nav
+        className="header-nav header-nav--desktop"
+        aria-label={t("header.mainNav")}
+      >
+        {NAV_LINKS.map(({ labelKey, anchor }) => (
           <button
             key={anchor}
             className="header-nav-link header-nav-link--btn"
             onClick={() => handleNavLink(anchor)}
           >
-            {label}
+            {t(labelKey)}
           </button>
         ))}
       </nav>
@@ -72,7 +82,7 @@ export default function Header() {
       <button
         type="button"
         className="header-burger"
-        aria-label={menuOpen ? "Close menu" : "Open menu"}
+        aria-label={menuOpen ? t("header.closeMenu") : t("header.openMenu")}
         aria-expanded={menuOpen}
         aria-controls="header-mobile-menu"
         onClick={() => setMenuOpen((o) => !o)}
@@ -83,7 +93,7 @@ export default function Header() {
       </button>
 
       <button className="header-cta" onClick={() => navigate("/steps")}>
-        Let's Check
+        {t("header.letsCheck")}
       </button>
 
       {menuOpen && (
@@ -92,7 +102,7 @@ export default function Header() {
           className="header-mobile"
           role="dialog"
           aria-modal="true"
-          aria-label="Navigation menu"
+          aria-label={t("header.navMenu")}
         >
           <div
             className="header-mobile-backdrop"
@@ -101,25 +111,31 @@ export default function Header() {
           />
           <div className="header-mobile-panel">
             <div className="header-mobile-head">
-              <span className="header-mobile-title">Menu</span>
+              <span className="header-mobile-title">{t("header.menu")}</span>
               <button
                 type="button"
                 className="header-mobile-close"
-                aria-label="Close menu"
+                aria-label={t("header.closeMenu")}
                 onClick={() => setMenuOpen(false)}
               >
                 ×
               </button>
             </div>
-            <nav className="header-mobile-nav" aria-label="Mobile">
-              {NAV_LINKS.map(({ label, anchor }) => (
+            <div className="header-mobile-lang">
+              <LanguageSwitcher />
+            </div>
+            <nav
+              className="header-mobile-nav"
+              aria-label={t("header.mobileNav")}
+            >
+              {NAV_LINKS.map(({ labelKey, anchor }) => (
                 <button
                   key={anchor}
                   type="button"
                   className="header-mobile-link"
                   onClick={() => handleNavLink(anchor)}
                 >
-                  {label}
+                  {t(labelKey)}
                 </button>
               ))}
             </nav>

@@ -2,8 +2,10 @@ import "../styles/CallToAction.css";
 import { useNavigate } from "react-router";
 import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 
 export default function CallToAction() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
@@ -48,7 +50,7 @@ export default function CallToAction() {
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          Ready to Start?
+          {t("callToAction.eyebrow")}
         </motion.span>
 
         <motion.h2
@@ -57,7 +59,9 @@ export default function CallToAction() {
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          Take Control of Your <em>Medication</em> Today
+          {t("callToAction.headingBefore")}
+          <em>{t("callToAction.headingEm")}</em>
+          {t("callToAction.headingAfter")}
         </motion.h2>
 
         <motion.div
@@ -70,7 +74,7 @@ export default function CallToAction() {
             className="cta-btn-primary"
             onClick={() => navigate("/steps")}
           >
-            Start Checking
+            {t("callToAction.startChecking")}
           </button>
           <button
             className="cta-btn-outline"
@@ -80,7 +84,7 @@ export default function CallToAction() {
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            Learn More
+            {t("callToAction.learnMore")}
           </button>
         </motion.div>
       </div>

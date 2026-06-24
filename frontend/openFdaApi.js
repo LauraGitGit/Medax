@@ -40,7 +40,12 @@ const FDA_FIELD_MAP = {
   warnings: "warnings",
 };
 
-export async function analyzeWithAI(medications, interactionTypes, fdaResults) {
+export async function analyzeWithAI(
+  medications,
+  interactionTypes,
+  fdaResults,
+  locale = "sv",
+) {
   if (!HAS_AI_BACKEND) {
     throw new Error("AI analysis requires the backend server to be running.");
   }
@@ -63,7 +68,12 @@ export async function analyzeWithAI(medications, interactionTypes, fdaResults) {
   const response = await fetch(`${API_BASE_URL}/api/analyze`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ medications, interactionTypes, fdaData }),
+    body: JSON.stringify({
+      medications,
+      interactionTypes,
+      fdaData,
+      locale,
+    }),
   });
 
   if (!response.ok) {

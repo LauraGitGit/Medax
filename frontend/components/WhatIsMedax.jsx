@@ -14,69 +14,25 @@ import {
 import { useNavigate } from "react-router";
 import "../styles/WhatIsMedax.css";
 import "../styles/AIPowered.css";
+import { useTranslation } from "../i18n/LanguageContext.jsx";
 
-const CARDS = [
-  {
-    Icon: Wine,
-    title: "Alcohol",
-    desc: "Know if your medication is safe with that glass of wine.",
-  },
-  {
-    Icon: Utensils,
-    title: "Food",
-    desc: "Understand which foods could affect your treatment.",
-  },
-  {
-    Icon: Pill,
-    title: "Drug Interactions",
-    desc: "Check combinations before mixing medications.",
-    highlight: true,
-  },
-  {
-    Icon: Baby,
-    title: "Pregnancy",
-    desc: "Understand medication safety during pregnancy.",
-  },
-  {
-    Icon: Heart,
-    title: "Breastfeeding",
-    desc: "Check if your medication passes through breast milk.",
-  },
-  {
-    Icon: Layers,
-    title: "All in One Place",
-    desc: "Fast, clear answers — no more digging through raw data.",
-  },
+const CARD_KEYS = [
+  { key: "alcohol", Icon: Wine },
+  { key: "food", Icon: Utensils },
+  { key: "drugInteractions", Icon: Pill, highlight: true },
+  { key: "pregnancy", Icon: Baby },
+  { key: "breastfeeding", Icon: Heart },
+  { key: "allInOne", Icon: Layers },
 ];
 
-const AI_FEATURES = [
-  {
-    icon: FileText,
-    title: "Plain-English Summaries",
-    desc: "No medical jargon. The AI reads the FDA data and rewrites it in simple English.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Severity Assessment",
-    desc: "Each result is rated mild, moderate, or severe — so you know instantly what needs attention.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Clear Recommendations",
-    desc: "Every analysis ends with a clear recommendation to guide you on what to do next.",
-  },
+const AI_FEATURE_KEYS = [
+  { key: "summaries", icon: FileText },
+  { key: "severity", icon: ShieldCheck },
+  { key: "recommendations", icon: Lightbulb },
 ];
-
-const DEMO_CARD = {
-  medication: "Ibuprofen + Aspirin",
-  type: "Drug-Drug Interaction",
-  summary:
-    "Taking Ibuprofen alongside Aspirin increases the risk of stomach irritation and bleeding. Both medications work in a similar way and combining them reduces the protective lining of your stomach, which can lead to serious discomfort or ulcers over time.",
-  recommendation:
-    "Talk to your doctor before taking both medications together.",
-};
 
 export default function WhatIsMedax() {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
   const navigate = useNavigate();
@@ -103,77 +59,82 @@ export default function WhatIsMedax() {
       className={`wim-section ${isVisible ? "wim-visible" : ""}`}
       ref={sectionRef}
     >
-      {/* ── Header ── */}
       <span className="wim-label">
         <span className="wim-label-dot" aria-hidden="true" />
-        About Medax
+        {t("whatIsMedax.label")}
       </span>
 
       <div className="wim-header">
         <div className="wim-header-left">
           <h2 className="wim-heading">
-            The answers
+            {t("whatIsMedax.headingLine1")}
             <br />
-            you need,
+            {t("whatIsMedax.headingLine2")}
             <br />
-            <em>when you need them.</em>
+            <em>{t("whatIsMedax.headingLine3")}</em>
           </h2>
-          <p className="wim-tagline">Medication safety, simplified.</p>
+          <p className="wim-tagline">{t("whatIsMedax.tagline")}</p>
         </div>
         <div className="wim-header-right">
+          <p className="wim-body">{t("whatIsMedax.body1")}</p>
           <p className="wim-body">
-            A lot of people leave with a prescription but still have unanswered
-            questions. Medax helps users quickly check medication risks when
-            everyday concerns come up — like alcohol, food, or drug
-            interactions.
-          </p>
-          <p className="wim-body">
-            Instead of searching through raw medical information, Medax uses{" "}
-            <strong style={{ color: "#c8622a" }}>GPT-4o mini</strong> to translate
-            complex FDA data into plain-English explanations — so you always
-            know exactly what to watch for and what to do next.
+            {t("whatIsMedax.body2").includes("GPT-4o mini") ? (
+              <>
+                {t("whatIsMedax.body2").split("GPT-4o mini")[0]}
+                <strong style={{ color: "#c8622a" }}>GPT-4o mini</strong>
+                {t("whatIsMedax.body2").split("GPT-4o mini")[1]}
+              </>
+            ) : (
+              t("whatIsMedax.body2")
+            )}
           </p>
         </div>
       </div>
 
-      {/* ── Interaction type cards ── */}
       <div className="wim-divider" aria-hidden="true">
         <span className="wim-divider-dot" />
       </div>
 
       <div className="wim-grid">
-        {CARDS.map(({ Icon, title, desc, highlight }) => (
+        {CARD_KEYS.map(({ key, Icon, highlight }) => (
           <div
-            key={title}
+            key={key}
             className={`wim-card ${highlight ? "wim-card--highlight" : ""}`}
           >
             <div className="wim-card-icon">
               <Icon size={18} strokeWidth={1.5} />
             </div>
-            <p className="wim-card-title">{title}</p>
-            <p className="wim-card-desc">{desc}</p>
+            <p className="wim-card-title">
+              {t(`whatIsMedax.cards.${key}.title`)}
+            </p>
+            <p className="wim-card-desc">
+              {t(`whatIsMedax.cards.${key}.desc`)}
+            </p>
           </div>
         ))}
       </div>
 
-      {/* ── AI sub-section ── */}
       <div className="wim-divider wim-divider--spacious" aria-hidden="true">
         <span className="wim-divider-dot" />
       </div>
 
       <div className="aip-label" style={{ marginBottom: "1.75rem" }}>
         <Sparkles size={13} aria-hidden="true" />
-        AI-Powered Analysis
+        {t("whatIsMedax.aiLabel")}
       </div>
 
       <div className="aip-features">
-        {AI_FEATURES.map(({ icon: Icon, title, desc }) => (
-          <div key={title} className="aip-feature">
+        {AI_FEATURE_KEYS.map(({ key, icon: Icon }) => (
+          <div key={key} className="aip-feature">
             <div className="aip-feature-icon">
               <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
             </div>
-            <h3 className="aip-feature-title">{title}</h3>
-            <p className="aip-feature-desc">{desc}</p>
+            <h3 className="aip-feature-title">
+              {t(`whatIsMedax.aiFeatures.${key}.title`)}
+            </h3>
+            <p className="aip-feature-desc">
+              {t(`whatIsMedax.aiFeatures.${key}.desc`)}
+            </p>
           </div>
         ))}
       </div>
@@ -181,32 +142,35 @@ export default function WhatIsMedax() {
       <div className="aip-demo">
         <div className="aip-demo-label">
           <Sparkles size={12} aria-hidden="true" />
-          Example AI result
+          {t("whatIsMedax.demoLabel")}
         </div>
 
         <article className="aip-demo-card">
           <div className="aip-demo-card-top">
             <div className="aip-demo-meta">
-              <span className="aip-demo-type">{DEMO_CARD.type}</span>
-              <span className="aip-demo-med">{DEMO_CARD.medication}</span>
+              <span className="aip-demo-type">{t("whatIsMedax.demoType")}</span>
+              <span className="aip-demo-med">
+                {t("whatIsMedax.demoMedication")}
+              </span>
             </div>
             <span className="aip-demo-badge aip-demo-badge--moderate">
-              moderate
+              {t("whatIsMedax.severityModerate")}
             </span>
           </div>
-          <p className="aip-demo-summary">{DEMO_CARD.summary}</p>
+          <p className="aip-demo-summary">{t("whatIsMedax.demoSummary")}</p>
           <div className="aip-demo-rec">
-            <strong>What to do:</strong> {DEMO_CARD.recommendation}
+            <strong>{t("whatIsMedax.whatToDo")}</strong>{" "}
+            {t("whatIsMedax.demoRecommendation")}
           </div>
         </article>
 
         <button
           className="aip-cta-btn"
           onClick={() => navigate("/steps")}
-          aria-label="Analyze your medications"
+          aria-label={t("whatIsMedax.analyzeAria")}
         >
           <Sparkles size={15} aria-hidden="true" />
-          Analyze My Medications
+          {t("whatIsMedax.analyzeBtn")}
         </button>
       </div>
     </section>
