@@ -16,10 +16,9 @@ const PILL_LAYOUT = {
   missedDoseWarning: { left: "70%", top: 78, tilt: -60 },
 };
 
-// Slightly wider gap for longer Swedish labels on these two pills only.
 const SV_PILL_NUDGE = {
   skipDoseAlert: { left: "12%" },
-  dailyReminder: { left: "34%" },
+  dailyReminder: { left: "28%" },
 };
 
 const PILL_COLORS = {
